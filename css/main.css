@@ -1848,7 +1848,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #fff066;
+  background: #61ff8c;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2636,8 +2636,10 @@ embed {
   text-align: center;
 }
 .site-meta .site-title {
-  font-size: 32px;
+  font-size: 38px;
   color: #555;
+  font-weight: normal;
+/*font-family: 'Lobster Two', 'Roboto Slab', "PingFang SC", "Microsoft YaHei", sans-serif;*/
 }
 .site-meta .site-subtitle {
   margin-top: 10px;
