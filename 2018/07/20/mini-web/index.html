@@ -161,7 +161,7 @@
 <meta property="og:site_name" content="Vince&#39;s Blog">
 <meta property="og:description" content="mini-Web业务逻辑及其实现为什么需要WSGI？当服务器收到浏览器请求后， 需要判断请求的是静态资源还是动态资源。如果是静态，则直接返回静态页面给浏览器；如果是动态，则需要处理数据后返回给浏览器。由于要保证服务器长期稳定运行，通常处理数据的这部分功能需要独立出来，因此会用到应用程序框架。 另外，为了不同web服务器和不同web框架之间的通配性以及可移植性，因此需要遵循WSGI(Web Serv">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-07-20T11:51:33.094Z">
+<meta property="og:updated_time" content="2018-07-20T12:03:50.010Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mini-Web业务逻辑及其实现 &#x2F; Business Logic for mini-web Frame">
 <meta name="twitter:description" content="mini-Web业务逻辑及其实现为什么需要WSGI？当服务器收到浏览器请求后， 需要判断请求的是静态资源还是动态资源。如果是静态，则直接返回静态页面给浏览器；如果是动态，则需要处理数据后返回给浏览器。由于要保证服务器长期稳定运行，通常处理数据的这部分功能需要独立出来，因此会用到应用程序框架。 另外，为了不同web服务器和不同web框架之间的通配性以及可移植性，因此需要遵循WSGI(Web Serv">
@@ -400,7 +400,7 @@
                 
               
 
-              <time title="创建时间：2018-07-20 19:34:48 / 修改时间：19:51:33" itemprop="dateCreated datePublished" datetime="2018-07-20T19:34:48+08:00">2018-07-20</time>
+              <time title="创建时间：2018-07-20 19:34:48 / 修改时间：20:03:50" itemprop="dateCreated datePublished" datetime="2018-07-20T19:34:48+08:00">2018-07-20</time>
             
 
             
@@ -451,6 +451,7 @@
       
         <h2 id="mini-Web业务逻辑及其实现"><a href="#mini-Web业务逻辑及其实现" class="headerlink" title="mini-Web业务逻辑及其实现"></a>mini-Web业务逻辑及其实现</h2><h3 id="为什么需要WSGI？"><a href="#为什么需要WSGI？" class="headerlink" title="为什么需要WSGI？"></a>为什么需要WSGI？</h3><p>当服务器收到浏览器请求后， 需要判断请求的是静态资源还是动态资源。如果是静态，则直接返回静态页面给浏览器；如果是动态，则需要处理数据后返回给浏览器。由于要保证服务器长期稳定运行，通常处理数据的这部分功能需要独立出来，因此会用到应用程序框架。</p>
 <p>另外，为了不同web服务器和不同web框架之间的通配性以及可移植性，因此需要遵循WSGI(Web Server Gateway Interface，服务器网关接口)。 WSGI没有官方的实现，因为WSGI更像一个协议，遵循该协议的WSGI应用都可以在任何服务器上运行。</p>
+<a id="more"></a>
 <h3 id="定义WSGI接口"><a href="#定义WSGI接口" class="headerlink" title="定义WSGI接口"></a>定义WSGI接口</h3><p>我们只需要在web框架中定义一个符合WSGI标准的HTTP处理函数，即可响应HTTP请求。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">application</span><span class="params">(environ, start_response)</span>:</span></span><br><span class="line">    start_response(<span class="string">'200 OK'</span>, [(<span class="string">'Content-Type'</span>, <span class="string">'text/html'</span>)])</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'Hello there!'</span></span><br></pre></td></tr></table></figure>
 <p>application()函数接收两个参数</p>
@@ -486,7 +487,7 @@
   <p><span>本文标题:</span><a href="/2018/07/20/mini-web/">mini-Web业务逻辑及其实现 / Business Logic for mini-web Frame</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Vincent Zheng 的个人博客">Vincent Zheng</a></p>
   <p><span>发布时间:</span>2018年07月20日 - 19:07</p>
-  <p><span>最后更新:</span>2018年07月20日 - 19:07</p>
+  <p><span>最后更新:</span>2018年07月20日 - 20:07</p>
   <p><span>原始链接:</span><a href="/2018/07/20/mini-web/" title="mini-Web业务逻辑及其实现 / Business Logic for mini-web Frame">http://yoursite.com/2018/07/20/mini-web/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2018/07/20/mini-web/"  aria-label="复制成功！"></i></span>
   </p>
