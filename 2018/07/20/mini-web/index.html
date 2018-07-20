@@ -153,20 +153,25 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Vince&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="mini-Web业务逻辑及其实现为什么需要WSGI？当服务器收到浏览器请求后， 需要判断请求的是静态资源还是动态资源。如果是静态，则直接返回静态页面给浏览器；如果是动态，则需要处理数据后返回给浏览器。由于要保证服务器长期稳定运行，通常处理数据的这部分功能需要独立出来，因此会用到应用程序框架。 另外，为了不同web服务器和不同web框架之间的通配性以及可移植性，因此需要遵循WSGI(Web Serv">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mini-Web业务逻辑及其实现">
+<meta property="og:url" content="http://yoursite.com/2018/07/20/mini-web/index.html">
 <meta property="og:site_name" content="Vince&#39;s Blog">
+<meta property="og:description" content="mini-Web业务逻辑及其实现为什么需要WSGI？当服务器收到浏览器请求后， 需要判断请求的是静态资源还是动态资源。如果是静态，则直接返回静态页面给浏览器；如果是动态，则需要处理数据后返回给浏览器。由于要保证服务器长期稳定运行，通常处理数据的这部分功能需要独立出来，因此会用到应用程序框架。 另外，为了不同web服务器和不同web框架之间的通配性以及可移植性，因此需要遵循WSGI(Web Serv">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-20T11:36:35.943Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Vince&#39;s Blog">
+<meta name="twitter:title" content="mini-Web业务逻辑及其实现">
+<meta name="twitter:description" content="mini-Web业务逻辑及其实现为什么需要WSGI？当服务器收到浏览器请求后， 需要判断请求的是静态资源还是动态资源。如果是静态，则直接返回静态页面给浏览器；如果是动态，则需要处理数据后返回给浏览器。由于要保证服务器长期稳定运行，通常处理数据的这部分功能需要独立出来，因此会用到应用程序框架。 另外，为了不同web服务器和不同web框架之间的通配性以及可移植性，因此需要遵循WSGI(Web Serv">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/20/mini-web/"/>
 
 
 
@@ -176,7 +181,7 @@
   };
 </script>
 
-  <title>Vince's Blog</title>
+  <title>mini-Web业务逻辑及其实现 | Vince's Blog</title>
   
 
 
@@ -232,8 +237,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -274,7 +278,7 @@
         
         
           
-          <li class="menu-item menu-item-home menu-item-active">
+          <li class="menu-item menu-item-home">
     <a href="/" rel="section">首页</a>
   </li>
         
@@ -337,9 +341,9 @@
           
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -371,11 +375,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/20/mini-web/" itemprop="url">
-                  mini-Web业务逻辑及其实现
-                </a>
+          <h1 class="post-title" itemprop="name headline">mini-Web业务逻辑及其实现
               
             
           </h1>
@@ -449,9 +449,7 @@
       
 
       
-        
-          
-            <h2 id="mini-Web业务逻辑及其实现"><a href="#mini-Web业务逻辑及其实现" class="headerlink" title="mini-Web业务逻辑及其实现"></a>mini-Web业务逻辑及其实现</h2><h3 id="为什么需要WSGI？"><a href="#为什么需要WSGI？" class="headerlink" title="为什么需要WSGI？"></a>为什么需要WSGI？</h3><p>当服务器收到浏览器请求后， 需要判断请求的是静态资源还是动态资源。如果是静态，则直接返回静态页面给浏览器；如果是动态，则需要处理数据后返回给浏览器。由于要保证服务器长期稳定运行，通常处理数据的这部分功能需要独立出来，因此会用到应用程序框架。</p>
+        <h2 id="mini-Web业务逻辑及其实现"><a href="#mini-Web业务逻辑及其实现" class="headerlink" title="mini-Web业务逻辑及其实现"></a>mini-Web业务逻辑及其实现</h2><h3 id="为什么需要WSGI？"><a href="#为什么需要WSGI？" class="headerlink" title="为什么需要WSGI？"></a>为什么需要WSGI？</h3><p>当服务器收到浏览器请求后， 需要判断请求的是静态资源还是动态资源。如果是静态，则直接返回静态页面给浏览器；如果是动态，则需要处理数据后返回给浏览器。由于要保证服务器长期稳定运行，通常处理数据的这部分功能需要独立出来，因此会用到应用程序框架。</p>
 <p>另外，为了不同web服务器和不同web框架之间的通配性以及可移植性，因此需要遵循WSGI(Web Server Gateway Interface，服务器网关接口)。 WSGI没有官方的实现，因为WSGI更像一个协议，遵循该协议的WSGI应用都可以在任何服务器上运行。</p>
 <h3 id="定义WSGI接口"><a href="#定义WSGI接口" class="headerlink" title="定义WSGI接口"></a>定义WSGI接口</h3><p>我们只需要在web框架中定义一个符合WSGI标准的HTTP处理函数，即可响应HTTP请求。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">application</span><span class="params">(environ, start_response)</span>:</span></span><br><span class="line">    start_response(<span class="string">'200 OK'</span>, [(<span class="string">'Content-Type'</span>, <span class="string">'text/html'</span>)])</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'Hello there!'</span></span><br></pre></td></tr></table></figure>
@@ -467,8 +465,6 @@
 <p>框架端</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">from</span> pymysql <span class="keyword">import</span> connect</span><br><span class="line"><span class="keyword">import</span> urllib.parse</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个空字典,用来存储路由</span></span><br><span class="line">URL_ROUTE = &#123;&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义一个装饰器函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">route</span><span class="params">(url)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper_func</span><span class="params">(func)</span>:</span></span><br><span class="line">        URL_ROUTE[url] = func</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">call_func</span><span class="params">(*args, **kwargs)</span>:</span></span><br><span class="line">            <span class="keyword">return</span> func(*args, **kwargs)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> call_func</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> wrapper_func</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@route(r'/add/(\d+).html')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_choose</span><span class="params">(file_name, url)</span>:</span></span><br><span class="line">    <span class="string">"""添加自选功能"""</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 先通过正则判断,取出url里html前面的一部分,即股票代码</span></span><br><span class="line">    ret = re.match(url, file_name)</span><br><span class="line">    <span class="keyword">if</span> ret:</span><br><span class="line">        stock_code = ret.group(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    db = connect(host=<span class="string">'localhost'</span>, port=<span class="number">3306</span>, user=<span class="string">'root'</span>, password=<span class="string">'mysql'</span>, database=<span class="string">'stock_db'</span>, charset=<span class="string">'utf8'</span>)</span><br><span class="line">    cursor = db.cursor()</span><br><span class="line">    <span class="comment"># 判断该股票是否已在关注列表</span></span><br><span class="line">    sql = <span class="string">"""select i.code from info as i inner join focus as f on i.id=f.info_id where i.code=%s;"""</span></span><br><span class="line">    cursor.execute(sql, (stock_code,))</span><br><span class="line">    <span class="keyword">if</span> cursor.fetchone():</span><br><span class="line">        cursor.close()</span><br><span class="line">        db.close()</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"该股票(%s)已在自选中了,请不要重复添加"</span> % stock_code</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 不在关注列表,则添加到关注列表中</span></span><br><span class="line">    sql = <span class="string">"""INSERT INTO focus (info_id) select id from info where code=%s;"""</span></span><br><span class="line">    cursor.execute(sql, (stock_code,))</span><br><span class="line">    db.commit()</span><br><span class="line">    cursor.close()</span><br><span class="line">    db.close()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="string">"(%s)添加成功!"</span> % stock_code</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@route(r'/del/(\d+).html')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">del_choose</span><span class="params">(file_name, url)</span>:</span></span><br><span class="line">    <span class="string">"""删除自选"""</span></span><br><span class="line">    ret = re.match(url, file_name)</span><br><span class="line">    <span class="keyword">if</span> ret:</span><br><span class="line">        stock_code = ret.group(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    db = connect(host=<span class="string">'localhost'</span>, port=<span class="number">3306</span>, user=<span class="string">'root'</span>, password=<span class="string">'mysql'</span>, database=<span class="string">'stock_db'</span>, charset=<span class="string">'utf8'</span>)</span><br><span class="line">    cursor = db.cursor()</span><br><span class="line">    <span class="comment"># 判断该股票是否不在关注列表</span></span><br><span class="line">    sql = <span class="string">"""select i.code from info as i inner join focus as f on i.id=f.info_id where i.code=%s;"""</span></span><br><span class="line">    cursor.execute(sql, (stock_code,))</span><br><span class="line">    <span class="keyword">if</span>  <span class="keyword">not</span> cursor.fetchone():</span><br><span class="line">        cursor.close()</span><br><span class="line">        db.close()</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"在自选中没有该股票(%s),无法删除"</span> % stock_code</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 在关注列表,则从数据库focus中删除该记录</span></span><br><span class="line">    sql = <span class="string">"""delete from focus where info_id=(select id from info where code=%s);"""</span></span><br><span class="line">    cursor.execute(sql, (stock_code,))</span><br><span class="line">    db.commit()</span><br><span class="line">    cursor.close()</span><br><span class="line">    db.close()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="string">"(%s)删除成功!"</span> % stock_code</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@route(r'/update/(\d+).html')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show_update_page</span><span class="params">(file_name, url)</span>:</span></span><br><span class="line">    <span class="string">"""显示update页面"""</span></span><br><span class="line">    ret = re.match(url, file_name)</span><br><span class="line">    <span class="keyword">if</span> ret:</span><br><span class="line">        stock_code = ret.group(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">"./templates/update.html"</span>) <span class="keyword">as</span> f:</span><br><span class="line">        content = f.read()</span><br><span class="line"></span><br><span class="line">    db = connect(host=<span class="string">'localhost'</span>, port=<span class="number">3306</span>, user=<span class="string">'root'</span>, password=<span class="string">'mysql'</span>, database=<span class="string">'stock_db'</span>, charset=<span class="string">'utf8'</span>)</span><br><span class="line">    cursor = db.cursor()</span><br><span class="line">    sql = <span class="string">'''select note_info from focus where info_id=(select id from info where code=%s) ;'''</span></span><br><span class="line">    cursor.execute(sql, [stock_code])</span><br><span class="line">    note_info = cursor.fetchone()</span><br><span class="line"></span><br><span class="line">    cursor.close()</span><br><span class="line">    db.close()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 使用正则替换content中的&#123;%code%&#125;</span></span><br><span class="line">    content = re.sub(<span class="string">r"\&#123;%code%\&#125;"</span>, stock_code, content)</span><br><span class="line">    <span class="comment"># 使用正则替换content中的&#123;%note_info%&#125;  fetchone()取出来的是元祖,需要转换为str</span></span><br><span class="line">    content = re.sub(<span class="string">r"\&#123;%note_info%\&#125;"</span>, str(note_info[<span class="number">0</span>]), content)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> content</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@route(r'/update/(\d+)/(.*).html')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">update_note_info</span><span class="params">(file_name, url)</span>:</span></span><br><span class="line">    ret = re.match(url, file_name)</span><br><span class="line">    <span class="keyword">if</span> ret:</span><br><span class="line">        stock_code = ret.group(<span class="number">1</span>)</span><br><span class="line">        note_info = ret.group(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 浏览器会对中文进行url编码, 这里需要先解码</span></span><br><span class="line">    note_info = urllib.parse.unquote(note_info)</span><br><span class="line"></span><br><span class="line">    db = connect(host=<span class="string">'localhost'</span>, port=<span class="number">3306</span>, user=<span class="string">'root'</span>, password=<span class="string">'mysql'</span>, database=<span class="string">'stock_db'</span>, charset=<span class="string">'utf8'</span>)</span><br><span class="line">    cursor = db.cursor()</span><br><span class="line">    sql = <span class="string">'''UPDATE focus set note_info=%s where info_id=(select id from info where code=%s);'''</span></span><br><span class="line">    cursor.execute(sql, [note_info, stock_code])</span><br><span class="line">    db.commit()</span><br><span class="line">    cursor.close()</span><br><span class="line">    db.close()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="string">"(%s)修改成功!"</span> % stock_code</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@route('/index.html')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">(file_name, url)</span>:</span></span><br><span class="line">    <span class="string">"""返回index.html的内容"""</span></span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">"./templates/index.html"</span>) <span class="keyword">as</span> f:</span><br><span class="line">        content = f.read()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 这里替换为mysql中查询到的数据</span></span><br><span class="line">    db = connect(host=<span class="string">'localhost'</span>, port=<span class="number">3306</span>, user=<span class="string">'root'</span>, password=<span class="string">'mysql'</span>, database=<span class="string">'stock_db'</span>, charset=<span class="string">'utf8'</span>)</span><br><span class="line">    cursor = db.cursor()</span><br><span class="line">    sql = <span class="string">"select * from info;"</span></span><br><span class="line">    cursor.execute(sql)</span><br><span class="line">    info_data = cursor.fetchall()</span><br><span class="line"></span><br><span class="line">    cursor.close()</span><br><span class="line">    db.close()</span><br><span class="line"></span><br><span class="line">    html_template = <span class="string">'''</span></span><br><span class="line"><span class="string">     &lt;tr&gt;</span></span><br><span class="line"><span class="string">        &lt;td&gt;%s&lt;/td&gt;</span></span><br><span class="line"><span class="string">        &lt;td&gt;%s&lt;/td&gt;</span></span><br><span class="line"><span class="string">        &lt;td&gt;%s&lt;/td&gt;</span></span><br><span class="line"><span class="string">        &lt;td&gt;%s&lt;/td&gt;</span></span><br><span class="line"><span class="string">        &lt;td&gt;%s&lt;/td&gt;</span></span><br><span class="line"><span class="string">        &lt;td&gt;%s&lt;/td&gt;</span></span><br><span class="line"><span class="string">        &lt;td&gt;%s&lt;/td&gt;</span></span><br><span class="line"><span class="string">        &lt;td&gt;%s&lt;/td&gt;</span></span><br><span class="line"><span class="string">        &lt;td&gt;</span></span><br><span class="line"><span class="string">            &lt;input type="button" value="添加" id="toAdd" name="toAdd" systemidvaule="%s"&gt;</span></span><br><span class="line"><span class="string">    &lt;/tr&gt;</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line"></span><br><span class="line">    table_content = <span class="string">""</span></span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> info_data:</span><br><span class="line">        table_content += html_template % (</span><br><span class="line">            line[<span class="number">0</span>], line[<span class="number">1</span>], line[<span class="number">2</span>], line[<span class="number">3</span>], line[<span class="number">4</span>], line[<span class="number">5</span>], line[<span class="number">6</span>], line[<span class="number">7</span>], line[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 使用正则替换content中的&#123;%content%&#125;</span></span><br><span class="line">    content = re.sub(<span class="string">r"\&#123;%content%\&#125;"</span>, table_content, content)</span><br><span class="line">    <span class="keyword">return</span> content</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@route('/center.html')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">center</span><span class="params">(file_name, url)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">"./templates/center.html"</span>) <span class="keyword">as</span> f:</span><br><span class="line">        content = f.read()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># my_stock_info = "BUG制造机"</span></span><br><span class="line">    db = connect(host=<span class="string">'localhost'</span>, port=<span class="number">3306</span>, user=<span class="string">'root'</span>, password=<span class="string">'mysql'</span>, database=<span class="string">'stock_db'</span>, charset=<span class="string">'utf8'</span>)</span><br><span class="line">    cursor = db.cursor()</span><br><span class="line">    sql = <span class="string">'''</span></span><br><span class="line"><span class="string">        select i.code,i.short,i.chg,i.turnover,i.price,i.highs,f.note_info</span></span><br><span class="line"><span class="string">        from info as i inner join focus as f on f.info_id=i.id;</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">    cursor.execute(sql)</span><br><span class="line">    info_data = cursor.fetchall()</span><br><span class="line"></span><br><span class="line">    cursor.close()</span><br><span class="line">    db.close()</span><br><span class="line"></span><br><span class="line">    html_template = <span class="string">'''</span></span><br><span class="line"><span class="string">        &lt;tr&gt;</span></span><br><span class="line"><span class="string">            &lt;td&gt;%s&lt;/td&gt;</span></span><br><span class="line"><span class="string">            &lt;td&gt;%s&lt;/td&gt;</span></span><br><span class="line"><span class="string">            &lt;td&gt;%s&lt;/td&gt;</span></span><br><span class="line"><span class="string">            &lt;td&gt;%s&lt;/td&gt;</span></span><br><span class="line"><span class="string">            &lt;td&gt;%s&lt;/td&gt;</span></span><br><span class="line"><span class="string">            &lt;td&gt;%s&lt;/td&gt;</span></span><br><span class="line"><span class="string">            &lt;td&gt;%s&lt;/td&gt;</span></span><br><span class="line"><span class="string">            &lt;td&gt;</span></span><br><span class="line"><span class="string">              &lt;a type="button" class="btn btn-default btn-xs" href="/update/%s.html"&gt; &lt;span class="glyphicon glyphicon-star" aria-hidden="true"&gt;&lt;/span&gt; 修改 &lt;/a&gt;</span></span><br><span class="line"><span class="string">            &lt;/td&gt;</span></span><br><span class="line"><span class="string">            &lt;td&gt;</span></span><br><span class="line"><span class="string">                &lt;input type="button" value="删除" id="toDel" name="toDel" systemidvaule="%s"&gt;</span></span><br><span class="line"><span class="string">            &lt;/td&gt;</span></span><br><span class="line"><span class="string">        &lt;/tr&gt;</span></span><br><span class="line"><span class="string">        '''</span></span><br><span class="line"></span><br><span class="line">    table_content = <span class="string">""</span></span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> info_data:</span><br><span class="line">        table_content += html_template % (</span><br><span class="line">        line[<span class="number">0</span>], line[<span class="number">1</span>], line[<span class="number">2</span>], line[<span class="number">3</span>], line[<span class="number">4</span>], line[<span class="number">5</span>], line[<span class="number">6</span>], line[<span class="number">0</span>], line[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 使用正则替换content中的&#123;%content%&#125;</span></span><br><span class="line">    content = re.sub(<span class="string">r"\&#123;%content%\&#125;"</span>, table_content, content)</span><br><span class="line">    <span class="keyword">return</span> content</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># environ 是从服务器接受到的包含HTTP请求信息的dict对象， start_response指向服务器中的函数 发送HTTP报文信息</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">application</span><span class="params">(environ, start_response)</span>:</span></span><br><span class="line">    <span class="comment"># start_response函数传入两个参数</span></span><br><span class="line">    <span class="comment"># 第一个是报文信息，第二个是报文头，列表[]</span></span><br><span class="line">    start_response(<span class="string">'200 OK'</span>, [(<span class="string">'Content-Type'</span>, <span class="string">'text/html;charset=utf-8'</span>)])</span><br><span class="line">    <span class="comment"># env = &#123;'PATH_INFO': "/index.py"&#125;</span></span><br><span class="line">    file_name = environ[<span class="string">'PATH_INFO'</span>]  <span class="comment"># 取出"/index.py"</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="comment"># 把URL字典拆成两个元素,key是url,value是指向的方法</span></span><br><span class="line">        <span class="keyword">for</span> url, call_func <span class="keyword">in</span> URL_ROUTE.items():</span><br><span class="line">            <span class="comment"># 将浏览器请求的url地址和字典里的url进行匹配, 如果成功调用方法</span></span><br><span class="line">            ret = re.match(url, file_name)</span><br><span class="line">            print(ret)</span><br><span class="line">            <span class="keyword">if</span> ret:</span><br><span class="line">                <span class="comment"># 将请求的地址和url当作参数传递给调用的函数</span></span><br><span class="line">                <span class="keyword">return</span> call_func(file_name, url)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"没有访问的页面 ---&gt; %s"</span> % file_name</span><br><span class="line">            <span class="comment"># return URL_ROUTE[file_name]()</span></span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> err:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"-----&gt;&gt;&gt;%s"</span> % str(err)</span><br></pre></td></tr></table></figure>
 
-          
-        
       
     </div>
 
@@ -486,569 +482,48 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/18/communication/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Vincent Zheng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Vince's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/18/communication/" itemprop="url">
-                  完整网络通信过程 / Communication
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-07-18 13:54:39 / 修改时间：18:07:59" itemprop="dateCreated datePublished" datetime="2018-07-18T13:54:39+08:00">2018-07-18</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/python/" rel="tag"># python</a>
           
-            
-          
-
-          
-          
-             <span id="/2018/07/18/communication/" class="leancloud_visitors" data-flag-title="完整网络通信过程 / Communication">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
+      
+        <div class="post-widgets">
         
-          
-            <h2 id="完整网络通信过程"><a href="#完整网络通信过程" class="headerlink" title="完整网络通信过程"></a>完整网络通信过程</h2><p>以访问<a href="https://github.com为例简要解析网络通信过程" target="_blank" rel="noopener">https://github.com为例简要解析网络通信过程</a></p>
-<h3 id="IP地址解析"><a href="#IP地址解析" class="headerlink" title="IP地址解析"></a>IP地址解析</h3><ul>
-<li>用户PC-A (192.168.1.1) 在浏览器中输入URL (<a href="https://github.com)，" target="_blank" rel="noopener">https://github.com)，</a> 客户端准备一个查询“<a href="https://github.com”的IP地址的数据包,发往DNS服务器" target="_blank" rel="noopener">https://github.com”的IP地址的数据包,发往DNS服务器</a>(数据包中包含了源地址IP, 目的地址即DNS服务器的IP地址: 192.168.2.1, 以及本机UDP端口).</li>
-<li>数据包通过网络接口层发给本网段网关, 由网关转发<ul>
-<li>在网络接口层会将数据包封闭为数据帧, 帧头要添加源MAC地址和目的MAC地址, 但此时还不知道目的MAC地址(即网关的MAC地址)</li>
-<li><ul>
-<li>PC-A在本网段发送ARP协议广播数据包, 请求网关192.168.1.254的MAC地址</li>
-</ul>
-</li>
-<li><ul>
-<li>广播数据包封装后由交换机转发到本网段除PC-A外所有计算机(网络接口)上 (基本靠吼)</li>
-</ul>
-</li>
-<li><ul>
-<li>IP地址为192.168.1.254的计算机(网关)会应答这个数据包, 其余计算机不应答</li>
-</ul>
-</li>
-<li><ul>
-<li>应答数据包通过交换机返回给PC-A, 这样PC-A就知道了网关的MAC地址</li>
-</ul>
-</li>
-<li>此时DNS查询数据包可以发送到交换机, 并转发给本网段的网关(一般由路由器实现网关功能,这里叫作Router-A)</li>
-</ul>
-</li>
-<li>接下来Router-A查看自己的路由表, 找到目的IP所在的网段, 经由多个路由器将数据转发到目的IP所在网段的路由(这里叫做Router-B)</li>
-<li>Router-B接收到DNS查询数据包, 同时新产生一个ARP广播数据包, 同样靠吼的方式查询 192.168.2.1 的MAC地址</li>
-<li>DNS服务器响应, Router-B将数据包发送给DNS服务器</li>
-<li><ul>
-<li>DNS服务器检查自身缓存，如果存在记录则直接返回结果</li>
-<li>如果记录老化或不存在，则DNS服务器需要向<a href="https://zh.wikipedia.org/wiki/%E6%A0%B9%E5%9F%9F%E5%90%8D%E4%BC%BA%E6%9C%8D%E5%99%A8" target="_blank" rel="noopener">根域名服务器</a>[1]发送查询报文,通过一系列交互得到主机的A(Address)记录,存入自身缓存并返回给客户端(详见维基百科)</li>
-</ul>
-</li>
-<li>UDP服务器此时有源IP, 源MAC地址, 以及UDP目的端口, 据此回复给PC-A (同样经过多个路由转发)</li>
-<li>现在PC-A得到了目的主机的IP地址, 即<a href="https://github.com的IP地址为192.168.2.2" target="_blank" rel="noopener">https://github.com的IP地址为192.168.2.2</a>, 开始向web服务器请求页面。访问Web服务器是使用HTTP协议，在运输层使用TCP协议，TCP协议通过三次握手连接服务器。 </li>
-</ul>
-<h3 id="三次握手，四次挥手"><a href="#三次握手，四次挥手" class="headerlink" title="三次握手，四次挥手"></a>三次握手，四次挥手</h3><p>所谓三次握手（Three-Way Handshake）即建立TCP连接，就是指建立一个TCP连接时，需要客户端和服务端总共发送3个包以确认连接的建立。<strong>由客户端执行connect()触发</strong>。  </p>
-<ol>
-<li>第一次握手：Client将标志位SYN置为1，随机产生一个值seq=J，并将该数据包发送给Server，Client进入SYN_SENT状态，等待Server确认。</li>
-<li>第二次握手：Server收到数据包后由标志位SYN=1知道Client请求建立连接，Server将标志位SYN和ACK都置为1，ack=J+1，随机产生一个值seq=K，并将该数据包发送给Client以确认连接请求，Server进入SYN_RCVD状态。</li>
-<li>第三次握手：Client收到确认后，检查ack是否为J+1，ACK是否为1，如果正确则将标志位ACK置为1，ack=K+1，并将该数据包发送给Server，Server检查ack是否为K+1，ACK是否为1，如果正确则连接建立成功，Client和Server进入ESTABLISHED状态，完成三次握手，随后Client与Server之间可以开始传输数据了。</li>
-</ol>
-<p>所谓四次挥手（Four-Way Wavehand）即终止TCP连接，就是指断开一个TCP连接时，需要客户端和服务端总共发送4个包以确认连接的断开。<strong>由客户端或服务端任一方执行close来触发</strong>。  </p>
-<p>每个方向都必须要单独进行关闭，这一原则是当一方完成数据发送任务后，发送一个FIN来终止这一方向的连接，收到一个FIN只是意味着这一方向上没有数据流动了，即不会再收到数据了，但是在这个TCP连接上仍然能够发送数据，直到这一方向也发送了FIN。首先进行关闭的一方将执行主动关闭，而另一方则执行被动关闭，上图描述的即是如此。</p>
-<ol>
-<li>第一次挥手：Client发送一个FIN，用来关闭Client到Server的数据传送，Client进入FIN_WAIT_1状态。</li>
-<li>第二次挥手：Server收到FIN后，发送一个ACK给Client，确认序号为收到序号+1（与SYN相同，一个FIN占用一个序号），Server进入CLOSE_WAIT状态。</li>
-<li>第三次挥手：Server发送一个FIN，用来关闭Server到Client的数据传送，Server进入LAST_ACK状态。</li>
-<li>第四次挥手：Client收到FIN后，Client进入TIME_WAIT状态，接着发送一个ACK给Server，确认序号为收到序号+1，Server进入CLOSED状态，完成四次挥手。</li>
-</ol>
-<p>名词:</p>
-<p>A记录: A (Address) 记录是用来指定主机名（或域名）对应的IP地址记录。</p>
-<p>网关： 网关是一种充当转换重任的计算机系统或设备，在网络层上实现网络互连。实质上是一个网络通向其他网络的IP地址。即，只有设置好网关的IP地址，TCP/IP协议才能实现不同网络之间的相互通信。网关IP地址是具有路由功能的设备的IP地址，一般是路由器，还有启用了路由协议的服务器（实质上相当于一台路由器）、代理服务器（也相当于一台路由器）。 </p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/16/booklist/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Vincent Zheng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Vince's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/16/booklist/" itemprop="url">
-                  书单 / Booklist
-                </a>
-              
-            
-          </h1>
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
         
 
-        <div class="post-meta">
-          <span class="post-time">
+        
 
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-07-16 16:41:08" itemprop="dateCreated datePublished" datetime="2018-07-16T16:41:08+08:00">2018-07-16</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-07-17 09:07:39" itemprop="dateModified" datetime="2018-07-17T09:07:39+08:00">2018-07-17</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/07/16/booklist/" class="leancloud_visitors" data-flag-title="书单 / Booklist">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
+        
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
       
       
 
       
-        
-          
-            <p>记录阅读的书籍: [日期] + [书名] + [作者]</p>
-<p>不定期更新</p>
-<p><em>注: 早期阅读的书籍日期统一为2010.01</em></p>
-<h2 id="专业向"><a href="#专业向" class="headerlink" title="专业向"></a>专业向</h2><h3 id="计算机"><a href="#计算机" class="headerlink" title="计算机"></a>计算机</h3><p>2018.7 <a href="http://iissnan.com/progit/" target="_blank" rel="noopener">Pro Git / Scott Chacon</a></p>
-<h2 id="非专业向"><a href="#非专业向" class="headerlink" title="非专业向"></a>非专业向</h2>
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/16/intro/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Vincent Zheng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Vince's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/16/intro/" itemprop="url">
-                  序 / Intro
-                </a>
-              
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
+              <a href="/2018/07/18/communication/" rel="next" title="完整网络通信过程 / Communication">
+                <i class="fa fa-chevron-left"></i> 完整网络通信过程 / Communication
+              </a>
             
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-07-16 10:31:59" itemprop="dateCreated datePublished" datetime="2018-07-16T10:31:59+08:00">2018-07-16</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-07-19 19:32:05" itemprop="dateModified" datetime="2018-07-19T19:32:05+08:00">2018-07-19</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/07/16/intro/" class="leancloud_visitors" data-flag-title="序 / Intro">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <h2 id="关于这个博客"><a href="#关于这个博客" class="headerlink" title="关于这个博客"></a>关于这个博客</h2><p>使用hexo搭建，主题为NexT.Muse</p>
-<h3 id="搭建过程"><a href="#搭建过程" class="headerlink" title="搭建过程"></a>搭建过程</h3><ul>
-<li><p>安装hexo. 前置: Node.js \ Git 必须</p>
-<p>在想要安装hexo的位置新建一个文件夹<code>hexo</code>, 使用以下指令完成安装:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-<p>初期搭建时是在Windows平台，在cmd内运行命令</p>
-</li>
-<li><p>建站</p>
-<p>在指定文件夹中初始化所需要的文件. 这里folder为blog</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init &lt;folder&gt;</span><br><span class="line">$ cd &lt;folder&gt;</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
-<p>在github上新增一个repository，命名<code>&lt;site-name&gt;.github.io</code>, 将其SSH关联到blog根目录下的_config.yml中最下方的deploy</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: #git_repository_ssh_here</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-<p>在hexo/blog开启git bash，运行以下指令即可在本地页面(Http:localhost:4000)调试</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g &amp;&amp; hexo s</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>主题优化</p>
-<p>参考<a href="https://www.jianshu.com/p/1f8107a8778c" target="_blank" rel="noopener">这篇文章</a></p>
-</li>
-</ul>
-<h3 id="搭建中遇到的问题"><a href="#搭建中遇到的问题" class="headerlink" title="搭建中遇到的问题"></a>搭建中遇到的问题</h3><ul>
-<li><p>Leancloud文章阅读统计出现“Counter not initialized! See more at console err msg. ”</p>
-<p>问题在升级next到v6.0后出现。</p>
-<p>参考<a href="https://leaferx.online/2018/02/11/lc-security/解决" target="_blank" rel="noopener">https://leaferx.online/2018/02/11/lc-security/解决</a></p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -1058,14 +533,19 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -1086,8 +566,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -1149,6 +638,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#mini-Web业务逻辑及其实现"><span class="nav-number">1.</span> <span class="nav-text">mini-Web业务逻辑及其实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么需要WSGI？"><span class="nav-number">1.1.</span> <span class="nav-text">为什么需要WSGI？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义WSGI接口"><span class="nav-number">1.2.</span> <span class="nav-text">定义WSGI接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#server端"><span class="nav-number">1.3.</span> <span class="nav-text">server端</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1289,6 +794,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
 
   
 
@@ -1445,6 +954,23 @@
 
   
   
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 12687,
+    el: 'wpac-rating',
+    color: '82d6cf'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
 
   
 
