@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-center-circle.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Lato:300,300italic,400,400italic,700,700italic|Pacifico:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="datetime模块datetime模块属于Python标准库，用来处理时间和日期。 官方文档： https://docs.python.org/3.6/library/datetime.html 先看一个练习题： 有一类文件，文件名为 output_1981.10.21.txt 这种格式。要求使用Python 读取文件名中的日期时间信息，并找出这一天是星期几，并将文件改名为output_YYYY">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于python中datetime模块的用法">
+<meta property="og:url" content="http://zws910.github.io/2018/07/22/datetime-module/index.html">
+<meta property="og:site_name" content="Vince&#39;s Blog">
+<meta property="og:description" content="datetime模块datetime模块属于Python标准库，用来处理时间和日期。 官方文档： https://docs.python.org/3.6/library/datetime.html 先看一个练习题： 有一类文件，文件名为 output_1981.10.21.txt 这种格式。要求使用Python 读取文件名中的日期时间信息，并找出这一天是星期几，并将文件改名为output_YYYY">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-22T08:03:07.364Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于python中datetime模块的用法">
+<meta name="twitter:description" content="datetime模块datetime模块属于Python标准库，用来处理时间和日期。 官方文档： https://docs.python.org/3.6/library/datetime.html 先看一个练习题： 有一类文件，文件名为 output_1981.10.21.txt 这种格式。要求使用Python 读取文件名中的日期时间信息，并找出这一天是星期几，并将文件改名为output_YYYY">
+
+
+
+
+
+
+  <link rel="canonical" href="http://zws910.github.io/2018/07/22/datetime-module/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>关于python中datetime模块的用法 | Vince's Blog</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-122479175-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-122479175-1');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Vince's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Treat the world kindly and light up the night.</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">归档</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zws910.github.io/2018/07/22/datetime-module/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Vincent Zheng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vince's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">关于python中datetime模块的用法
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-22 15:47:10 / 修改时间：16:03:07" itemprop="dateCreated datePublished" datetime="2018-07-22T15:47:10+08:00">2018-07-22</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/07/22/datetime-module/" class="leancloud_visitors" data-flag-title="关于python中datetime模块的用法">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="datetime模块"><a href="#datetime模块" class="headerlink" title="datetime模块"></a>datetime模块</h2><p>datetime模块属于Python标准库，用来处理时间和日期。</p>
+<p>官方文档： <a href="https://docs.python.org/3.6/library/datetime.html" target="_blank" rel="noopener">https://docs.python.org/3.6/library/datetime.html</a></p>
+<p>先看一个练习题：</p>
+<p>有一类文件，文件名为 output_1981.10.21.txt 这种格式。<br>要求使用Python 读取文件名中的日期时间信息，并找出这一天是星期几，并将文件改名为output_YYYY-MM-DD-W.txt<br>W：星期几(1-7), 星期一对应’1’, 星期天对应’7’</p>
+<a id="more"></a>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line">file_name = <span class="string">'output_1981.10.21.txt'</span></span><br><span class="line"></span><br><span class="line">res = re.match(<span class="string">r'(\w+_)(\d&#123;4&#125;\.\d&#123;2&#125;\.\d&#123;2&#125;)(\.\w+)'</span>, file_name)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> res:</span><br><span class="line">    f_class = res.group(<span class="number">1</span>)  <span class="comment"># output_</span></span><br><span class="line">    f_date = res.group(<span class="number">2</span>)  <span class="comment"># 1981.10.21</span></span><br><span class="line">    f_format = res.group(<span class="number">3</span>)  <span class="comment"># .txt</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">"File not found!"</span>)</span><br><span class="line"><span class="comment"># for test</span></span><br><span class="line">print(<span class="string">"The file name is %s + %s + %s"</span> % (f_class, f_date, f_format))</span><br><span class="line"></span><br><span class="line">date_li = f_date.split(<span class="string">"."</span>)</span><br><span class="line">f_year = int(date_li[<span class="number">0</span>])  <span class="comment"># 1981 int</span></span><br><span class="line">f_month = int(date_li[<span class="number">1</span>])  <span class="comment"># 10 int</span></span><br><span class="line">f_day = int(date_li[<span class="number">2</span>])  <span class="comment"># 21 int</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用datetime模块下的datetime(), 依次传入年,月,日(类型必须为int),可以返回一个时间类型 &lt;class 'datetime.datetime'&gt;</span></span><br><span class="line"><span class="comment"># 再调用.strftime("%w")将时间类型转换为str，并得到对应是星期几</span></span><br><span class="line">week = datetime(f_year, f_month, f_day).strftime(<span class="string">"%w"</span>)</span><br><span class="line">print(week)  <span class="comment"># 3 &lt;class 'str'&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 默认星期天对应数字0</span></span><br><span class="line"><span class="keyword">if</span> week == <span class="string">"0"</span>:</span><br><span class="line">    week = <span class="string">"7"</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    week = str(week)</span><br><span class="line"></span><br><span class="line">new_f_date = f_date + <span class="string">'.'</span> + week  <span class="comment"># 1981.10.21.3</span></span><br><span class="line">new_file_name = f_class + new_f_date + f_format</span><br><span class="line">print(new_file_name)  <span class="comment"># output_1981.10.21.3.txt</span></span><br></pre></td></tr></table></figure>
+<h2 id="datatime-strftime-format-格式化"><a href="#datatime-strftime-format-格式化" class="headerlink" title="datatime.strftime(format) 格式化"></a>datatime.strftime(format) 格式化</h2><blockquote>
+<p>Return a string representing the date and time, controlled by an explicit format string. </p>
+</blockquote>
+<p>返回一个表示日期和时间的字符串，由一个明确的格式化字符串控制(即传入的参数).</p>
+<p>具体传入参数对应的返回值格式如下:</p>
+<table>
+<thead>
+<tr>
+<th>Directive</th>
+<th>Meaning</th>
+<th>Example</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>%a</code></td>
+<td>Weekday as locale’s abbreviated name.</td>
+<td>Sun, Mon, …, Sat (en_US);So, Mo, …, Sa (de_DE)</td>
+<td>(1)</td>
+</tr>
+<tr>
+<td><code>%A</code></td>
+<td>Weekday as locale’s full name.</td>
+<td>Sunday, Monday, …, Saturday (en_US);Sonntag, Montag, …, Samstag (de_DE)</td>
+<td>(1)</td>
+</tr>
+<tr>
+<td><code>%w</code></td>
+<td>Weekday as a decimal number, where 0 is Sunday and 6 is Saturday.</td>
+<td>0, 1, …, 6</td>
+<td></td>
+</tr>
+<tr>
+<td><code>%d</code></td>
+<td>Day of the month as a zero-padded decimal number.</td>
+<td>01, 02, …, 31</td>
+<td></td>
+</tr>
+<tr>
+<td><code>%b</code></td>
+<td>Month as locale’s abbreviated name.</td>
+<td>Jan, Feb, …, Dec (en_US);Jan, Feb, …, Dez (de_DE)</td>
+<td>(1)</td>
+</tr>
+<tr>
+<td><code>%B</code></td>
+<td>Month as locale’s full name.</td>
+<td>January, February, …, December (en_US);Januar, Februar, …, Dezember (de_DE)</td>
+<td>(1)</td>
+</tr>
+<tr>
+<td><code>%m</code></td>
+<td>Month as a zero-padded decimal number.</td>
+<td>01, 02, …, 12</td>
+<td></td>
+</tr>
+<tr>
+<td><code>%y</code></td>
+<td>Year without century as a zero-padded decimal number.</td>
+<td>00, 01, …, 99</td>
+<td></td>
+</tr>
+<tr>
+<td><code>%Y</code></td>
+<td>Year with century as a decimal number.</td>
+<td>0001, 0002, …, 2013, 2014, …, 9998, 9999</td>
+<td>(2)</td>
+</tr>
+<tr>
+<td><code>%H</code></td>
+<td>Hour (24-hour clock) as a zero-padded decimal number.</td>
+<td>00, 01, …, 23</td>
+<td></td>
+</tr>
+<tr>
+<td><code>%I</code></td>
+<td>Hour (12-hour clock) as a zero-padded decimal number.</td>
+<td>01, 02, …, 12</td>
+<td></td>
+</tr>
+<tr>
+<td><code>%p</code></td>
+<td>Locale’s equivalent of either AM or PM.</td>
+<td>AM, PM (en_US);am, pm (de_DE)</td>
+<td>(1), (3)</td>
+</tr>
+<tr>
+<td><code>%M</code></td>
+<td>Minute as a zero-padded decimal number.</td>
+<td>00, 01, …, 59</td>
+<td></td>
+</tr>
+<tr>
+<td><code>%S</code></td>
+<td>Second as a zero-padded decimal number.</td>
+<td>00, 01, …, 59</td>
+<td>(4)</td>
+</tr>
+<tr>
+<td><code>%f</code></td>
+<td>Microsecond as a decimal number, zero-padded on the left.</td>
+<td>000000, 000001, …, 999999</td>
+<td>(5)</td>
+</tr>
+<tr>
+<td><code>%z</code></td>
+<td>UTC offset in the form +HHMM or -HHMM (empty string if the object is naive).</td>
+<td>(empty), +0000, -0400, +1030</td>
+<td>(6)</td>
+</tr>
+<tr>
+<td><code>%Z</code></td>
+<td>Time zone name (empty string if the object is naive).</td>
+<td>(empty), UTC, EST, CST</td>
+<td></td>
+</tr>
+<tr>
+<td><code>%j</code></td>
+<td>Day of the year as a zero-padded decimal number.</td>
+<td>001, 002, …, 366</td>
+<td></td>
+</tr>
+<tr>
+<td><code>%U</code></td>
+<td>Week number of the year (Sunday as the first day of the week) as a zero padded decimal number. All days in a new year preceding the first Sunday are considered to be in week 0.</td>
+<td>00, 01, …, 53</td>
+<td>(7)</td>
+</tr>
+<tr>
+<td><code>%W</code></td>
+<td>Week number of the year (Monday as the first day of the week) as a decimal number. All days in a new year preceding the first Monday are considered to be in week 0.</td>
+<td>00, 01, …, 53</td>
+<td>(7)</td>
+</tr>
+<tr>
+<td><code>%c</code></td>
+<td>Locale’s appropriate date and time representation.</td>
+<td>Tue Aug 16 21:30:00 1988 (en_US);Di 16 Aug 21:30:00 1988 (de_DE)</td>
+<td>(1)</td>
+</tr>
+<tr>
+<td><code>%x</code></td>
+<td>Locale’s appropriate date representation.</td>
+<td>08/16/88 (None);08/16/1988 (en_US);16.08.1988 (de_DE)</td>
+<td>(1)</td>
+</tr>
+<tr>
+<td><code>%X</code></td>
+<td>Locale’s appropriate time representation.</td>
+<td>21:30:00 (en_US);21:30:00 (de_DE)</td>
+<td>(1)</td>
+</tr>
+<tr>
+<td><code>%%</code></td>
+<td>A literal <code>&#39;%&#39;</code> character.</td>
+<td>%</td>
+</tr>
+</tbody>
+</table>
+<p> 详见<a href="https://docs.python.org/3.6/library/datetime.html#strftime-strptime-behavior" target="_blank" rel="noopener">https://docs.python.org/3.6/library/datetime.html#strftime-strptime-behavior</a></p>
+<h2 id="datetime对象"><a href="#datetime对象" class="headerlink" title="datetime对象"></a>datetime对象</h2><p>datetime模块下的datetime对象的构造方法为: </p>
+<p><strong>class datetime.datetime(year, month, day[, hour[, minute[, second[, microsecond[, tzinfo]]]]])</strong>  </p>
+<p>year, month 和 day 参数是必须的，其他参数可选， 参数tzinfo表示可选的时区信息，一般我们也用不到。参数值的范围如下：</p>
+<ul>
+<li>MINYEAR &lt;= year &lt;= MAXYEAR</li>
+<li>1 &lt;= month &lt;= 12</li>
+<li>1 &lt;= day &lt;= number of days in the given month and year</li>
+<li>0 &lt;= hour &lt; 24</li>
+<li>0 &lt;= minute &lt; 60</li>
+<li>0 &lt;= second &lt; 60</li>
+<li>0 &lt;= microsecond &lt; 1000000</li>
+</ul>
+<p>例:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line">t = datetime(<span class="number">2015</span>, <span class="number">8</span>, <span class="number">23</span>, <span class="number">15</span>, <span class="number">12</span>, <span class="number">59</span>)</span><br><span class="line">print(t)</span><br><span class="line">print(type(t))</span><br><span class="line"></span><br><span class="line">输出：</span><br><span class="line"><span class="number">2015</span><span class="number">-08</span><span class="number">-23</span> <span class="number">15</span>:<span class="number">12</span>:<span class="number">59</span></span><br><span class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">datetime</span>.<span class="title">datetime</span>'&gt;</span></span><br></pre></td></tr></table></figure>
+<p>如果我们只传入参数year, month, day， 则返回结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2015-08-23 00:00:00</span><br></pre></td></tr></table></figure>
+<p>下面我们看下datetime对象的几个方法：</p>
+<p><strong>datetime.today()</strong> 返回本地当前的时间</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line">print(<span class="string">"当前时间： %s"</span> % datetime.today())</span><br><span class="line"></span><br><span class="line">输出：</span><br><span class="line">当前时间： <span class="number">2018</span><span class="number">-07</span><span class="number">-22</span> <span class="number">15</span>:<span class="number">19</span>:<span class="number">21.932494</span></span><br></pre></td></tr></table></figure>
+<p><strong>datetime.now([tz])</strong> 返回本地当前的日期和时间。如果可选的参数 tz 为 None 或者没有指定，结果同today()</p>
+<p>tz参数为时区参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;Construct a datetime from time.time() and optional time zone info.&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> pytz</span><br><span class="line"></span><br><span class="line">print(<span class="string">"当前时间： %s"</span> % datetime.now())</span><br><span class="line">Shanghai = pytz.timezone(<span class="string">'Asia/Shanghai'</span>)</span><br><span class="line">Eastern = pytz.timezone(<span class="string">'US/Eastern'</span>)</span><br><span class="line">print(<span class="string">"当前时间： %s"</span> % datetime.now(tz=Shanghai))</span><br><span class="line">print(<span class="string">"东部标准时间： %s"</span> % datetime.now(tz=Eastern))</span><br><span class="line"></span><br><span class="line">输出：</span><br><span class="line">当前时间： <span class="number">2018</span><span class="number">-07</span><span class="number">-22</span> <span class="number">15</span>:<span class="number">20</span>:<span class="number">28.522964</span></span><br><span class="line">当前时间： <span class="number">2018</span><span class="number">-07</span><span class="number">-22</span> <span class="number">15</span>:<span class="number">43</span>:<span class="number">14.152172</span>+<span class="number">08</span>:<span class="number">00</span></span><br><span class="line">东部标准时间： <span class="number">2018</span><span class="number">-07</span><span class="number">-22</span> <span class="number">03</span>:<span class="number">43</span>:<span class="number">14.152172</span><span class="number">-04</span>:<span class="number">00</span></span><br></pre></td></tr></table></figure>
+<p><strong>datetime对象还有两个属性：min和max</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line">min_time = datetime.min</span><br><span class="line">max_time = datetime.max</span><br><span class="line">print(min_time)</span><br><span class="line">print(max_time)</span><br><span class="line"></span><br><span class="line">输出：</span><br><span class="line"><span class="number">0001</span><span class="number">-01</span><span class="number">-01</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span></span><br><span class="line"><span class="number">9999</span><span class="number">-12</span><span class="number">-31</span> <span class="number">23</span>:<span class="number">59</span>:<span class="number">59.999999</span></span><br></pre></td></tr></table></figure>
+<p>datetime模块的对象有如下：</p>
+<ul>
+<li>timedelta</li>
+<li>date</li>
+<li><strong>datetime</strong></li>
+<li>time</li>
+<li>tzinfo</li>
+</ul>
+<p>有时间再来更新其他对象的用法…</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2018/07/22/datetime-module/">关于python中datetime模块的用法</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 Vincent Zheng 的个人博客">Vincent Zheng</a></p>
+  <p><span>发布时间:</span>2018年07月22日 - 15:07</p>
+  <p><span>最后更新:</span>2018年07月22日 - 16:07</p>
+  <p><span>原始链接:</span><a href="/2018/07/22/datetime-module/" title="关于python中datetime模块的用法">http://zws910.github.io/2018/07/22/datetime-module/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://zws910.github.io/2018/07/22/datetime-module/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+    });
+    });  
+</script>
+
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/20/mini-web/" rel="next" title="mini-Web业务逻辑及其实现 / Business Logic for mini-web Frame">
+                <i class="fa fa-chevron-left"></i> mini-Web业务逻辑及其实现 / Business Logic for mini-web Frame
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Vincent Zheng</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#datetime模块"><span class="nav-number">1.</span> <span class="nav-text">datetime模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#datatime-strftime-format-格式化"><span class="nav-number">2.</span> <span class="nav-text">datatime.strftime(format) 格式化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#datetime对象"><span class="nav-number">3.</span> <span class="nav-text">datetime对象</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vincent Zheng</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Muse</a> v6.3.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("MPYK0PQGRnLMk46sEHLgVuji-gzGzoHsz", "jbmvakbz3uQrJuURE2PPJS92");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            
+            counter.save(null, {
+              success: function(counter) {
+                
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+            
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "default";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "default";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 12687,
+    el: 'wpac-rating',
+    color: '82d6cf'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+
+<script type="text/javascript" src="/js/src/love.js"></script>
