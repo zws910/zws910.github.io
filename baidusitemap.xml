@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+
+    
+  <url>
+    <loc>http://zws910.github.io/2018/08/09/context-in-flask/</loc>
+    <lastmod>2018-08-09T02:31:09.521Z</lastmod>
+    <data>
+        <display>
+        <title>简析Flask上下文 / Context in Flask</title>
+        <pubTime>2018-08-09T02:27:56.000Z</pubTime>
+        
+        <tag>Flask Python</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+    
+    
+    
+  <url>
+    <loc>http://zws910.github.io/2018/07/22/datetime-module/</loc>
+    <lastmod>2018-07-22T08:03:07.364Z</lastmod>
+    <data>
+        <display>
+        <title>关于python中datetime模块的用法</title>
+        <pubTime>2018-07-22T07:47:10.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zws910.github.io/2018/07/16/intro/</loc>
+    <lastmod>2018-07-20T12:07:39.295Z</lastmod>
+    <data>
+        <display>
+        <title>序 / Intro</title>
+        <pubTime>2018-07-16T02:31:59.000Z</pubTime>
+        
+        <tag>demo</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zws910.github.io/2018/07/16/booklist/</loc>
+    <lastmod>2018-07-20T12:06:49.316Z</lastmod>
+    <data>
+        <display>
+        <title>书单 / Booklist</title>
+        <pubTime>2018-07-16T08:41:08.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zws910.github.io/2018/07/18/communication/</loc>
+    <lastmod>2018-07-20T12:06:21.028Z</lastmod>
+    <data>
+        <display>
+        <title>完整网络通信过程 / Communication</title>
+        <pubTime>2018-07-18T05:54:39.000Z</pubTime>
+        
+        <tag>网络</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zws910.github.io/2018/07/20/mini-web/</loc>
+    <lastmod>2018-07-20T12:03:50.010Z</lastmod>
+    <data>
+        <display>
+        <title>mini-Web业务逻辑及其实现 / Business Logic for mini-web Frame</title>
+        <pubTime>2018-07-20T11:34:48.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+    
+    
+</urlset>
