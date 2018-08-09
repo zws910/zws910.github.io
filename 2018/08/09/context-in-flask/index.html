@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-center-circle.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Lato:300,300italic,400,400italic,700,700italic|Pacifico:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Flask中的上下文是比较难以理解的一个点, 参考了大佬们的文章, 这里记录一下自己的理解, 仅供抛砖引玉. 何为上下文? 上下文相当于一个容器, 保存了Flask程序运行过程中的一些信息. 如请求地址, Cookie等. Flask中有两种上下文: 请求上下文(request context) 和 应用上下文(application context) 应用上下文的生命周期依赖于请求的生命周期.">
+<meta name="keywords" content="Flask Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="简析Flask上下文 &#x2F; Context in Flask">
+<meta property="og:url" content="http://zws910.github.io/2018/08/09/context-in-flask/index.html">
+<meta property="og:site_name" content="Vince&#39;s Blog">
+<meta property="og:description" content="Flask中的上下文是比较难以理解的一个点, 参考了大佬们的文章, 这里记录一下自己的理解, 仅供抛砖引玉. 何为上下文? 上下文相当于一个容器, 保存了Flask程序运行过程中的一些信息. 如请求地址, Cookie等. Flask中有两种上下文: 请求上下文(request context) 和 应用上下文(application context) 应用上下文的生命周期依赖于请求的生命周期.">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-08-09T02:31:09.521Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="简析Flask上下文 &#x2F; Context in Flask">
+<meta name="twitter:description" content="Flask中的上下文是比较难以理解的一个点, 参考了大佬们的文章, 这里记录一下自己的理解, 仅供抛砖引玉. 何为上下文? 上下文相当于一个容器, 保存了Flask程序运行过程中的一些信息. 如请求地址, Cookie等. Flask中有两种上下文: 请求上下文(request context) 和 应用上下文(application context) 应用上下文的生命周期依赖于请求的生命周期.">
+
+
+
+
+
+
+  <link rel="canonical" href="http://zws910.github.io/2018/08/09/context-in-flask/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>简析Flask上下文 / Context in Flask | Vince's Blog</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-122479175-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-122479175-1');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Vince's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Treat the world kindly and light up the night.</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">归档</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zws910.github.io/2018/08/09/context-in-flask/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Vincent Zheng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vince's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">简析Flask上下文 / Context in Flask<a href="https://github.com/theme-next/theme-next.org/_posts/tree/master/2018-08-09context-in-flask.md" class="post-edit-link" title="编辑" target="_blank">
+                    <i class="fa fa-pencil"></i>
+                  </a>
+                
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-09 10:27:56 / 修改时间：10:31:09" itemprop="dateCreated datePublished" datetime="2018-08-09T10:27:56+08:00">2018-08-09</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/08/09/context-in-flask/" class="leancloud_visitors" data-flag-title="简析Flask上下文 / Context in Flask">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Flask中的上下文是比较难以理解的一个点, 参考了大佬们的文章, 这里记录一下自己的理解, 仅供抛砖引玉.</p>
+<h2 id="何为上下文"><a href="#何为上下文" class="headerlink" title="何为上下文?"></a>何为上下文?</h2><ul>
+<li>上下文相当于一个容器, 保存了Flask程序运行过程中的一些信息. 如请求地址, Cookie等.</li>
+<li>Flask中有两种上下文: 请求上下文(request context) 和 应用上下文(application context)</li>
+<li>应用上下文的生命周期依赖于请求的生命周期.</li>
+</ul>
+<h2 id="请求上下文-Request-context"><a href="#请求上下文-Request-context" class="headerlink" title="请求上下文(Request context)"></a>请求上下文(Request context)</h2><p>请求上下文对象有：request、session</p>
+<h3 id="request"><a href="#request" class="headerlink" title="request"></a>request</h3><p>在 flask 中，可以直接在视图函数中使用 request 这个对象进行获取相关数据，而 request 就是请求上下文的对象，保存了当前本次请求的相关数据.</p>
+<a id="more"></a>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, g, request</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.before_first_request</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">before_first_request</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'before first request started'</span>)</span><br><span class="line">    print(request.url)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.before_request</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">before_request</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'before request started'</span>)</span><br><span class="line">    print(request.url)</span><br><span class="line"></span><br><span class="line">    g.name = <span class="string">"SampleApp"</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.after_request</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">after_request</span><span class="params">(response)</span>:</span></span><br><span class="line">    print(<span class="string">'after request finished'</span>)</span><br><span class="line">    print(request.url)</span><br><span class="line">    response.headers[<span class="string">'key'</span>] = <span class="string">'value'</span>  <span class="comment"># 可在此方法中对响应做统一处理</span></span><br><span class="line">    <span class="keyword">return</span> response</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.teardown_request</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">teardown_request</span><span class="params">(error)</span>:</span></span><br><span class="line">    print(<span class="string">'teardown request'</span>)</span><br><span class="line">    print(request.url)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'Hello, %s!'</span> % g.name</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    app.run(host=<span class="string">'0.0.0.0'</span>, debug=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
+<p>访问localhost:5000后输出</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">before first request started</span><br><span class="line">http://<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">5000</span>/</span><br><span class="line">before request started</span><br><span class="line">http://<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">5000</span>/</span><br><span class="line">after request finished</span><br><span class="line">http://<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">5000</span>/</span><br><span class="line">teardown request</span><br><span class="line">http://<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">5000</span>/</span><br></pre></td></tr></table></figure>
+<p>可以看出, 在每个请求上下文的勾子函数中, 我们都可以访问request对象, 并通过request.url得到其中存储的url信息.</p>
+<p>如果我们在上述代码中加上一段:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">handle_request</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'handle request'</span>)</span><br><span class="line">    print(request.url)</span><br><span class="line"></span><br><span class="line">handle_request()</span><br></pre></td></tr></table></figure>
+<p>运行时会报错</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">RuntimeError: working outside of request context</span><br><span class="line"><span class="comment"># 超出请求上下文范围</span></span><br></pre></td></tr></table></figure>
+<p>由此可见, request对象仅在请求的生命周期中能被访问到, 一旦请求的生命周期结束, 其上下文环境就不复存在了.</p>
+<p>通过request对象, 我们可以获得HTTP请求的内容, 比如: user = request.args.get(‘user’), 可以获取到get请求的参数.</p>
+<h3 id="session"><a href="#session" class="headerlink" title="session"></a>session</h3><p>session对象记录了请求会话中的用户信息.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> session</span><br><span class="line"></span><br><span class="line"><span class="comment"># 为了设置session， 必须先配置secret_key</span></span><br><span class="line">app.config[<span class="string">'SECRET_KEY'</span>] = <span class="string">'12345678'</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/login')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># 假装校验成功</span></span><br><span class="line">    session[<span class="string">'user_name'</span>] = <span class="string">'laowang'</span>  <span class="comment"># 可以记录用户信息</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'success'</span></span><br></pre></td></tr></table></figure>
+<h2 id="应用上下文-application-context"><a href="#应用上下文-application-context" class="headerlink" title="应用上下文(application context)"></a>应用上下文(application context)</h2><p>应用上下文的对象有: current_app , g对象</p>
+<p>它的作用主要是帮助 request 获取当前的应用，它是伴 request 而生，随 request 而灭的。</p>
+<h3 id="current-app"><a href="#current-app" class="headerlink" title="current_app"></a>current_app</h3><p>应用程序上下文,用于存储应用程序中的变量，可以通过current_app.name打印当前app的名称，也可以在current_app中存储一些变量，例如：</p>
+<ul>
+<li>应用的启动脚本是哪个文件，启动时指定了哪些参数</li>
+<li>加载了哪些配置文件，导入了哪些配置</li>
+<li>连了哪个数据库</li>
+<li>有哪些public的工具类、常量</li>
+<li>应用跑再哪个机器上，IP多少，内存多大</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">current_app.name</span><br><span class="line">current_app.test_value=<span class="string">'value'</span></span><br><span class="line"></span><br><span class="line">current_app.config.get(<span class="string">"DEBUG"</span>)  <span class="comment"># True</span></span><br><span class="line"><span class="comment"># 如果SECRET_KEY在程序中以明文设置, 这样可以得到该值</span></span><br><span class="line">password = current_app.config.get(<span class="string">"SECRET_KEY"</span>)</span><br><span class="line">print(password)</span><br></pre></td></tr></table></figure>
+<h3 id="g变量"><a href="#g变量" class="headerlink" title="g变量"></a>g变量</h3><p>g 作为 flask 程序全局的一个临时变量,充当者中间媒介的作用,我们可以通过它传递一些数据，g 保存的是当前请求的全局变量，不同的请求会有不同的全局变量，通过不同的thread id区别</p>
+<h3 id="应用上下文的勾子函数"><a href="#应用上下文的勾子函数" class="headerlink" title="应用上下文的勾子函数"></a>应用上下文的勾子函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.teardown_appcontext</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">teardown_db</span><span class="params">(error)</span>:</span></span><br><span class="line">    print(<span class="string">'teardown application'</span>)</span><br></pre></td></tr></table></figure>
+<p>应用上下文也有压栈和出栈的操作。在请求线程创建时，Flask会创建应用上下文对象，并将其压入”flask._app_ctx_stack”的栈中，然后在线程退出前将其从栈里弹出。这个”_app_ctx_stack”是ThreadLocal变量。也就是说应用上下文的生命周期，也只在一个请求线程内，我们无法通过应用上下文在请求之间传递信息。</p>
+<p>“_app_ctx_stack”一样是给Flask扩展开发用，应用开发不要去访问它。如果想在应用上下文中保存信息，可以用”flask.g”对象。</p>
+<p>应用上下文只有一个装饰器来修饰Hook函数，即”@app.teardown_appcontext”。 它会在应用上下文生命周期结束前，也就是从”_app_ctx_stack”出栈时被调用。 </p>
+<h2 id="Flask如何实现上下文"><a href="#Flask如何实现上下文" class="headerlink" title="Flask如何实现上下文?"></a>Flask如何实现上下文?</h2><p>下面通过源码了解一下 <strong>flask</strong> 如何实现这两种context：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 代码摘选自flask 0.5 中的ctx.py文件, 进行了部分删减</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">_RequestContext</span><span class="params">(object)</span>:</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, app, environ)</span>:</span></span><br><span class="line">        self.app = app</span><br><span class="line">        self.request = app.request_class(environ)</span><br><span class="line">        self.session = app.open_session(self.request)</span><br><span class="line">        self.g = _RequestGlobals()</span><br></pre></td></tr></table></figure>
+<p><strong>flask</strong> 使用<code>_RequestContext</code>的代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Flask</span><span class="params">(object)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">request_context</span><span class="params">(self, environ)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> _RequestContext(self, environ)</span><br></pre></td></tr></table></figure>
+<p>在<code>Flask</code>类中，每次请求都会调用这个<code>request_context</code>函数。这个函数则会创建一个<code>_RequestContext</code>对象。</p>
+<p>值得注意的是：这个对象在创建时，将<code>Flask</code>实例的本身作为实参传入<code>_RequestContext</code>自身，因此，<br><code>self.app = Flask()</code>。</p>
+<p>所以，虽然每次http请求都会创建一个<code>_RequestContext</code>对象，但是，每次创建的时候都会将同一个<code>Flask</code>对象传入该对象的<code>app</code>成员变量，使得：</p>
+<blockquote>
+<p>由同一个<code>Flask</code>对象响应的请求所创建的<code>_RequestContext</code>对象的<code>app</code>成员变量都共享同一个<strong>application</strong></p>
+</blockquote>
+<p>通过在<code>Flask</code>对象中创建<code>_RequestContext</code>对象，并将<code>Flask</code>自身作为参数传入<code>_RequestContext</code>对象的方式，实现了多个<strong>request context</strong>对应一个<strong>application context</strong> 的目的。</p>
+<p>接下来，看<code>self.request = app.request_class(environ)</code>这句。<br>由于<code>app</code>成员变量就是<code>app = Flask(__name__)</code>这个对象，所以，<code>app.request_class</code>就是<code>Flask.request_class</code>。<br>在<code>Flask</code>类的定义中：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">request_class = Request <span class="comment"># Request 是一个类，定义如下：</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Request</span><span class="params">(RequestBase)</span>:</span></span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+<p>所以：<br><code>self.request = app.request_class(environ)</code>实际上是创建了一个<code>Request</code>对象。<br>由于，一个http请求对应一个<code>_RequestContext</code>对象的创建，而每个<code>_RequestContext</code>对象的创建对应一个<code>Request</code>对象的创建，所以，每个http请求对应一个<code>Request</code>对象。</p>
+<p>到这里想必已经很清楚了：</p>
+<p><strong>application</strong> 就是指<code>app = Flask(__name__)</code>对象<br><strong>request</strong> 就是对应每次http 请求创建的<code>Request</code>对象<br><strong>flask</strong>通过<code>_RequestContext</code>将<code>app</code>与<code>Request</code>关联起来</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2018/08/09/context-in-flask/">简析Flask上下文 / Context in Flask</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 Vincent Zheng 的个人博客">Vincent Zheng</a></p>
+  <p><span>发布时间:</span>2018年08月09日 - 10:08</p>
+  <p><span>最后更新:</span>2018年08月09日 - 10:08</p>
+  <p><span>原始链接:</span><a href="/2018/08/09/context-in-flask/" title="简析Flask上下文 / Context in Flask">http://zws910.github.io/2018/08/09/context-in-flask/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://zws910.github.io/2018/08/09/context-in-flask/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+    });
+    });  
+</script>
+
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Flask-Python/" rel="tag"><i class="fa fa-tag"></i> Flask Python</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/22/datetime-module/" rel="next" title="关于python中datetime模块的用法">
+                <i class="fa fa-chevron-left"></i> 关于python中datetime模块的用法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b54446de97ac97c" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="Vincent Zheng" />
+            
+              <p class="site-author-name" itemprop="name">Vincent Zheng</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#何为上下文"><span class="nav-number">1.</span> <span class="nav-text">何为上下文?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#请求上下文-Request-context"><span class="nav-number">2.</span> <span class="nav-text">请求上下文(Request context)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#request"><span class="nav-number">2.1.</span> <span class="nav-text">request</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#session"><span class="nav-number">2.2.</span> <span class="nav-text">session</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用上下文-application-context"><span class="nav-number">3.</span> <span class="nav-text">应用上下文(application context)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#current-app"><span class="nav-number">3.1.</span> <span class="nav-text">current_app</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#g变量"><span class="nav-number">3.2.</span> <span class="nav-text">g变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用上下文的勾子函数"><span class="nav-number">3.3.</span> <span class="nav-text">应用上下文的勾子函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Flask如何实现上下文"><span class="nav-number">4.</span> <span class="nav-text">Flask如何实现上下文?</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vincent Zheng</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Muse</a> v6.3.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("MPYK0PQGRnLMk46sEHLgVuji-gzGzoHsz", "jbmvakbz3uQrJuURE2PPJS92");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            
+            counter.save(null, {
+              success: function(counter) {
+                
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+            
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 12687,
+    el: 'wpac-rating',
+    color: '82d6cf'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=6.3.0"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=6.3.0"></script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
+
+<script type="text/javascript" src="/js/src/love.js"></script>
