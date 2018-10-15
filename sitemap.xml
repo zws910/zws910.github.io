@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zws910.github.io/about/index.html</loc>
+    
+    <lastmod>2018-10-15T08:47:58.786Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://zws910.github.io/2018/07/18/communication/</loc>
     
     <lastmod>2018-08-16T13:20:31.768Z</lastmod>
@@ -75,13 +82,6 @@
     <loc>https://zws910.github.io/tags/index.html</loc>
     
     <lastmod>2018-07-16T07:54:13.160Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://zws910.github.io/about/index.html</loc>
-    
-    <lastmod>2018-07-16T07:52:31.152Z</lastmod>
     
   </url>
   
