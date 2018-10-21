@@ -4,6 +4,23 @@
 
     
   <url>
+    <loc>https://zws910.github.io/2018/10/21/redis-transaction/</loc>
+    <lastmod>2018-10-21T06:33:51.439Z</lastmod>
+    <data>
+        <display>
+        <title>redis事务及持久化 / Redis Transaction</title>
+        <pubTime>2018-10-21T06:29:13.000Z</pubTime>
+        
+        <tag>Redis</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://zws910.github.io/2018/07/16/booklist/</loc>
     <lastmod>2018-10-15T09:02:28.714Z</lastmod>
     <data>

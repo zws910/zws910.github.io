@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zws910.github.io/2018/10/21/redis-transaction/</loc>
+    
+    <lastmod>2018-10-21T06:33:51.439Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://zws910.github.io/2018/07/16/booklist/</loc>
     
     <lastmod>2018-10-15T09:02:28.714Z</lastmod>

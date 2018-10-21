@@ -158,25 +158,25 @@
 
 
 
-  <meta name="description" content="完整网络通信过程以访问https://github.com为例简要解析网络通信过程 IP地址解析 用户PC-A (192.168.1.1) 在浏览器中输入URL (https://github.com)， 客户端准备一个查询“https://github.com”的IP地址的数据包,发往DNS服务器(数据包中包含了源地址IP, 目的地址即DNS服务器的IP地址: 192.168.2.1, 以及本机">
-<meta name="keywords" content="Network">
+  <meta name="description" content="简单事务控制 redis是单线程处理所有client的请求 multi当前client连接进入一个事务上下文, 该连接后续的命令不会立即执行, 而是放到队列(Queue)中, 直到接收到exec指令后才会按顺序执行  123456789101112redis 127.0.0.1:6379&amp;gt; multiOKredis 127.0.0.1:6379&amp;gt; set age 10QUEUEDred">
+<meta name="keywords" content="Redis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="完整网络通信过程 &#x2F; Communication">
-<meta property="og:url" content="https://zws910.github.io/2018/07/18/communication/index.html">
+<meta property="og:title" content="redis事务及持久化 &#x2F; Redis Transaction">
+<meta property="og:url" content="https://zws910.github.io/2018/10/21/redis-transaction/index.html">
 <meta property="og:site_name" content="Vince&#39;s Blog">
-<meta property="og:description" content="完整网络通信过程以访问https://github.com为例简要解析网络通信过程 IP地址解析 用户PC-A (192.168.1.1) 在浏览器中输入URL (https://github.com)， 客户端准备一个查询“https://github.com”的IP地址的数据包,发往DNS服务器(数据包中包含了源地址IP, 目的地址即DNS服务器的IP地址: 192.168.2.1, 以及本机">
+<meta property="og:description" content="简单事务控制 redis是单线程处理所有client的请求 multi当前client连接进入一个事务上下文, 该连接后续的命令不会立即执行, 而是放到队列(Queue)中, 直到接收到exec指令后才会按顺序执行  123456789101112redis 127.0.0.1:6379&amp;gt; multiOKredis 127.0.0.1:6379&amp;gt; set age 10QUEUEDred">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-16T13:20:31.768Z">
+<meta property="og:updated_time" content="2018-10-21T06:33:51.439Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="完整网络通信过程 &#x2F; Communication">
-<meta name="twitter:description" content="完整网络通信过程以访问https://github.com为例简要解析网络通信过程 IP地址解析 用户PC-A (192.168.1.1) 在浏览器中输入URL (https://github.com)， 客户端准备一个查询“https://github.com”的IP地址的数据包,发往DNS服务器(数据包中包含了源地址IP, 目的地址即DNS服务器的IP地址: 192.168.2.1, 以及本机">
+<meta name="twitter:title" content="redis事务及持久化 &#x2F; Redis Transaction">
+<meta name="twitter:description" content="简单事务控制 redis是单线程处理所有client的请求 multi当前client连接进入一个事务上下文, 该连接后续的命令不会立即执行, 而是放到队列(Queue)中, 直到接收到exec指令后才会按顺序执行  123456789101112redis 127.0.0.1:6379&amp;gt; multiOKredis 127.0.0.1:6379&amp;gt; set age 10QUEUEDred">
 
 
 
 
 
 
-  <link rel="canonical" href="https://zws910.github.io/2018/07/18/communication/"/>
+  <link rel="canonical" href="https://zws910.github.io/2018/10/21/redis-transaction/"/>
 
 
 
@@ -186,7 +186,7 @@
   };
 </script>
 
-  <title>完整网络通信过程 / Communication | Vince's Blog</title>
+  <title>redis事务及持久化 / Redis Transaction | Vince's Blog</title>
   
 
 
@@ -363,7 +363,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://zws910.github.io/2018/07/18/communication/">
+    <link itemprop="mainEntityOfPage" href="https://zws910.github.io/2018/10/21/redis-transaction/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Vincent Zheng">
@@ -380,7 +380,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">完整网络通信过程 / Communication<a href="https://github.com/theme-next/theme-next.org/_posts/tree/master/2018-07-18communication.md" class="post-edit-link" title="编辑" target="_blank">
+          <h1 class="post-title" itemprop="name headline">redis事务及持久化 / Redis Transaction<a href="https://github.com/theme-next/theme-next.org/_posts/tree/master/2018-10-21redis-transaction.md" class="post-edit-link" title="编辑" target="_blank">
                     <i class="fa fa-pencil"></i>
                   </a>
                 
@@ -408,24 +408,12 @@
                 
               
 
-              <time title="创建时间：2018-07-18 13:54:39" itemprop="dateCreated datePublished" datetime="2018-07-18T13:54:39+08:00">2018-07-18</time>
+              <time title="创建时间：2018-10-21 14:29:13 / 修改时间：14:33:51" itemprop="dateCreated datePublished" datetime="2018-10-21T14:29:13+08:00">2018-10-21</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-08-16 21:20:31" itemprop="dateModified" datetime="2018-08-16T21:20:31+08:00">2018-08-16</time>
               
             
           </span>
@@ -438,7 +426,7 @@
 
           
           
-             <span id="/2018/07/18/communication/" class="leancloud_visitors" data-flag-title="完整网络通信过程 / Communication">
+             <span id="/2018/10/21/redis-transaction/" class="leancloud_visitors" data-flag-title="redis事务及持久化 / Redis Transaction">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -469,58 +457,32 @@
       
 
       
-        <h2 id="完整网络通信过程"><a href="#完整网络通信过程" class="headerlink" title="完整网络通信过程"></a>完整网络通信过程</h2><p>以访问<a href="https://github.com为例简要解析网络通信过程" target="_blank" rel="noopener">https://github.com为例简要解析网络通信过程</a></p>
-<h3 id="IP地址解析"><a href="#IP地址解析" class="headerlink" title="IP地址解析"></a>IP地址解析</h3><ul>
-<li>用户PC-A (192.168.1.1) 在浏览器中输入URL (<a href="https://github.com)，" target="_blank" rel="noopener">https://github.com)，</a> 客户端准备一个查询“<a href="https://github.com”的IP地址的数据包,发往DNS服务器" target="_blank" rel="noopener">https://github.com”的IP地址的数据包,发往DNS服务器</a>(数据包中包含了源地址IP, 目的地址即DNS服务器的IP地址: 192.168.2.1, 以及本机UDP端口).</li>
-<li>数据包通过网络接口层发给本网段网关, 由网关转发<ul>
-<li>在网络接口层会将数据包封闭为数据帧, 帧头要添加源MAC地址和目的MAC地址, 但此时还不知道目的MAC地址(即网关的MAC地址)</li>
-<li><ul>
-<li>PC-A在本网段发送ARP协议广播数据包, 请求网关192.168.1.254的MAC地址</li>
+        <h2 id="简单事务控制"><a href="#简单事务控制" class="headerlink" title="简单事务控制"></a>简单事务控制</h2><ul>
+<li>redis是单线程处理所有client的请求</li>
+<li><code>multi</code>当前client连接进入一个事务上下文, 该连接后续的命令不会立即执行, 而是放到队列(Queue)中, 直到接收到<code>exec</code>指令后才会按顺序执行</li>
 </ul>
-</li>
-<li><ul>
-<li>广播数据包封装后由交换机转发到本网段除PC-A外所有计算机(网络接口)上 (基本靠吼)</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">redis 127.0.0.1:6379&gt; multi</span><br><span class="line">OK</span><br><span class="line">redis 127.0.0.1:6379&gt; set age 10</span><br><span class="line">QUEUED</span><br><span class="line">redis 127.0.0.1:6379&gt; set age 20</span><br><span class="line">QUEUED</span><br><span class="line">redis 127.0.0.1:6379&gt; exec</span><br><span class="line">1) OK</span><br><span class="line">2) OK</span><br><span class="line">redis 127.0.0.1:6379&gt; get age</span><br><span class="line">&quot;20&quot;</span><br><span class="line">redis 127.0.0.1:6379&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用<code>discard</code>命令取消事务, 使其回滚</li>
+<li><code>watch</code>命令可以监视键值对, 当<code>exec</code>提交时如果被监视的键值对发生变化, 事务将被取消</li>
 </ul>
-</li>
-<li><ul>
-<li>IP地址为192.168.1.254的计算机(网关)会应答这个数据包, 其余计算机不应答</li>
+<h2 id="复杂事务控制-乐观锁"><a href="#复杂事务控制-乐观锁" class="headerlink" title="复杂事务控制 - 乐观锁"></a>复杂事务控制 - 乐观锁</h2><a id="more"></a>
+<ul>
+<li>基于version版本记录机制实现, 即为数据增加一个版本标识(version字段), 读取时将此版本号一同读出, 之后更新时对此版本号加1</li>
+<li>如果提交的数据版本号大于数据库当前版本号, 则予以更新, 否则失败</li>
+<li>即如果session 1和session 2同时对数据库进行操作, 在session 1提交更新之前, session 2已经完成提交, 那么数据库版本号已经+1, 则session 1提交失败</li>
+<li><strong>redis只能保证事务的每个命令连续执行, 如果事务中的一个命令失败了, 并不会回滚其他命令</strong></li>
 </ul>
-</li>
-<li><ul>
-<li>应答数据包通过交换机返回给PC-A, 这样PC-A就知道了网关的MAC地址</li>
-</ul>
-</li>
-<li>此时DNS查询数据包可以发送到交换机, 并转发给本网段的网关(一般由路由器实现网关功能,这里叫作Router-A)</li>
-</ul>
-</li>
-<li>接下来Router-A查看自己的路由表, 找到目的IP所在的网段, 经由多个路由器将数据转发到目的IP所在网段的路由(这里叫做Router-B)<a id="more"></a></li>
-<li>Router-B接收到DNS查询数据包, 同时新产生一个ARP广播数据包, 同样靠吼的方式查询 192.168.2.1 的MAC地址</li>
-<li>DNS服务器响应, Router-B将数据包发送给DNS服务器</li>
-<li><ul>
-<li>DNS服务器检查自身缓存，如果存在记录则直接返回结果</li>
-<li>如果记录老化或不存在，则DNS服务器需要向<a href="https://zh.wikipedia.org/wiki/%E6%A0%B9%E5%9F%9F%E5%90%8D%E4%BC%BA%E6%9C%8D%E5%99%A8" target="_blank" rel="noopener">根域名服务器</a>[1]发送查询报文,通过一系列交互得到主机的A(Address)记录,存入自身缓存并返回给客户端(详见维基百科)</li>
-</ul>
-</li>
-<li>UDP服务器此时有源IP, 源MAC地址, 以及UDP目的端口, 据此回复给PC-A (同样经过多个路由转发)</li>
-<li>现在PC-A得到了目的主机的IP地址, 即<a href="https://github.com的IP地址为192.168.2.2" target="_blank" rel="noopener">https://github.com的IP地址为192.168.2.2</a>, 开始向web服务器请求页面。访问Web服务器是使用HTTP协议，在运输层使用TCP协议，TCP协议通过三次握手连接服务器。 </li>
-</ul>
-<h3 id="三次握手，四次挥手"><a href="#三次握手，四次挥手" class="headerlink" title="三次握手，四次挥手"></a>三次握手，四次挥手</h3><p>所谓三次握手（Three-Way Handshake）即建立TCP连接，就是指建立一个TCP连接时，需要客户端和服务端总共发送3个包以确认连接的建立。<strong>由客户端执行connect()触发</strong>。  </p>
-<ol>
-<li>第一次握手：Client将标志位SYN置为1，随机产生一个值seq=J，并将该数据包发送给Server，Client进入SYN_SENT状态，等待Server确认。</li>
-<li>第二次握手：Server收到数据包后由标志位SYN=1知道Client请求建立连接，Server将标志位SYN和ACK都置为1，ack=J+1，随机产生一个值seq=K，并将该数据包发送给Client以确认连接请求，Server进入SYN_RCVD状态。</li>
-<li>第三次握手：Client收到确认后，检查ack是否为J+1，ACK是否为1，如果正确则将标志位ACK置为1，ack=K+1，并将该数据包发送给Server，Server检查ack是否为K+1，ACK是否为1，如果正确则连接建立成功，Client和Server进入ESTABLISHED状态，完成三次握手，随后Client与Server之间可以开始传输数据了。</li>
-</ol>
-<p>所谓四次挥手（Four-Way Wavehand）即终止TCP连接，就是指断开一个TCP连接时，需要客户端和服务端总共发送4个包以确认连接的断开。<strong>由客户端或服务端任一方执行close来触发</strong>。  </p>
-<p>每个方向都必须要单独进行关闭，这一原则是当一方完成数据发送任务后，发送一个FIN来终止这一方向的连接，收到一个FIN只是意味着这一方向上没有数据流动了，即不会再收到数据了，但是在这个TCP连接上仍然能够发送数据，直到这一方向也发送了FIN。首先进行关闭的一方将执行主动关闭，而另一方则执行被动关闭，上图描述的即是如此。</p>
-<ol>
-<li>第一次挥手：Client发送一个FIN，用来关闭Client到Server的数据传送，Client进入FIN_WAIT_1状态。</li>
-<li>第二次挥手：Server收到FIN后，发送一个ACK给Client，确认序号为收到序号+1（与SYN相同，一个FIN占用一个序号），Server进入CLOSE_WAIT状态。</li>
-<li>第三次挥手：Server发送一个FIN，用来关闭Server到Client的数据传送，Server进入LAST_ACK状态。</li>
-<li>第四次挥手：Client收到FIN后，Client进入TIME_WAIT状态，接着发送一个ACK给Server，确认序号为收到序号+1，Server进入CLOSED状态，完成四次挥手。</li>
-</ol>
-<p>名词:</p>
-<p>A记录: A (Address) 记录是用来指定主机名（或域名）对应的IP地址记录。</p>
-<p>网关： 网关是一种充当转换重任的计算机系统或设备，在网络层上实现网络互连。实质上是一个网络通向其他网络的IP地址。即，只有设置好网关的IP地址，TCP/IP协议才能实现不同网络之间的相互通信。网关IP地址是具有路由功能的设备的IP地址，一般是路由器，还有启用了路由协议的服务器（实质上相当于一台路由器）、代理服务器（也相当于一台路由器）。 </p>
+<h2 id="持久化机制"><a href="#持久化机制" class="headerlink" title="持久化机制"></a>持久化机制</h2><p>redis是支持持久化的内存数据库, 需要经常将内存中的数据同步到磁盘来保证持久化; 有snapshotting快照(默认)和append-only file (aof) 两种方式</p>
+<h3 id="snapshooting"><a href="#snapshooting" class="headerlink" title="snapshooting"></a>snapshooting</h3><p>将内存中的数据以快照的方式写入到二进制文件, 默认文件名dump.rdb; 可以修改redis配置来实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">save 900 1  # 900秒内如果超过1个key被修改, 则发起快照保存</span><br><span class="line">save 300 10  # 300秒内如果超过10个key被修改, 则发起快照保存</span><br></pre></td></tr></table></figure>
+<p>也可以使用<code>save</code>或<code>bgsave</code>命令通知redis做一次快照持久化(不推荐), 这种方式会阻塞所有client请求;</p>
+<p>另外需要注意, 每次快照持久化都是将内存数据完整写入磁盘一次, 如果数据量大时, 会造成大量的磁盘io操作, 严重影响性能</p>
+<h3 id="append-only-file"><a href="#append-only-file" class="headerlink" title="append-only file"></a>append-only file</h3><p>由于每次snapshooting之间有间隔, 如果redis意外down掉, 会丢失最后一次快照前的所有修改. 避免这种情况可以使用aof方式持久化</p>
+<p>aof方式下, redis会通过write函数追加到文件中(默认是appendonly.aof)</p>
+<p>配置文件:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">appendonly yes  # 启用aof持久化方式</span><br><span class="line"># appendfsync always  # 收到写命令立即写入磁盘, 最慢, 但是保证完全的持久化</span><br><span class="line">appendfsync everysec  # 每秒钟写入磁盘一次, 在性能和持久化方面做了折中</span><br><span class="line"># appendfsync no  # 完全依赖os, 性能最好, 但持久化没保证</span><br></pre></td></tr></table></figure>
+<p>使用aof方式的问题是, 其持久化文件会变得越来越大。 为了压缩, redis提供了<code>bgrewriteaof</code>命令; 收到此命令后,  redis将使用与快照类似的方式将内存中的数据以命令的形式保存到临时文件中, 最后替换原来的文件.</p>
 
       
     </div>
@@ -540,12 +502,12 @@
   <!-- JS库 sweetalert 可修改路径 -->
   <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/2018/07/18/communication/">完整网络通信过程 / Communication</a></p>
+  <p><span>本文标题:</span><a href="/2018/10/21/redis-transaction/">redis事务及持久化 / Redis Transaction</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Vincent Zheng 的个人博客">Vincent Zheng</a></p>
-  <p><span>发布时间:</span>2018年07月18日 - 13:07</p>
-  <p><span>最后更新:</span>2018年08月16日 - 21:08</p>
-  <p><span>原始链接:</span><a href="/2018/07/18/communication/" title="完整网络通信过程 / Communication">https://zws910.github.io/2018/07/18/communication/</a>
-    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://zws910.github.io/2018/07/18/communication/"  aria-label="复制成功！"></i></span>
+  <p><span>发布时间:</span>2018年10月21日 - 14:10</p>
+  <p><span>最后更新:</span>2018年10月21日 - 14:10</p>
+  <p><span>原始链接:</span><a href="/2018/10/21/redis-transaction/" title="redis事务及持久化 / Redis Transaction">https://zws910.github.io/2018/10/21/redis-transaction/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://zws910.github.io/2018/10/21/redis-transaction/"  aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
 </div>
@@ -576,7 +538,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Network/" rel="tag"><i class="fa fa-tag"></i> Network</a>
+            <a href="/tags/Redis/" rel="tag"><i class="fa fa-tag"></i> Redis</a>
           
         </div>
       
@@ -601,8 +563,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/16/booklist/" rel="next" title="书单 / Booklist">
-                <i class="fa fa-chevron-left"></i> 书单 / Booklist
+              <a href="/2018/08/16/pycharm-cvs/" rel="next" title="Pycharm的git/github配置问题解决办法 Could not read from remote repository.">
+                <i class="fa fa-chevron-left"></i> Pycharm的git/github配置问题解决办法 Could not read from remote repository.
               </a>
             
           </div>
@@ -610,10 +572,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/20/mini-web/" rel="prev" title="mini-Web业务逻辑及其实现 / Business Logic for mini-web Frame">
-                mini-Web业务逻辑及其实现 / Business Logic for mini-web Frame <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -766,7 +724,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#完整网络通信过程"><span class="nav-number">1.</span> <span class="nav-text">完整网络通信过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IP地址解析"><span class="nav-number">1.1.</span> <span class="nav-text">IP地址解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三次握手，四次挥手"><span class="nav-number">1.2.</span> <span class="nav-text">三次握手，四次挥手</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单事务控制"><span class="nav-number">1.</span> <span class="nav-text">简单事务控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复杂事务控制-乐观锁"><span class="nav-number">2.</span> <span class="nav-text">复杂事务控制 - 乐观锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#持久化机制"><span class="nav-number">3.</span> <span class="nav-text">持久化机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#snapshooting"><span class="nav-number">3.1.</span> <span class="nav-text">snapshooting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#append-only-file"><span class="nav-number">3.2.</span> <span class="nav-text">append-only file</span></a></li></ol></li></ol></div>
             
 
           </div>
