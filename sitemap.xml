@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zws910.github.io/2018/12/30/ubuntu-install-mongodb/</loc>
+    
+    <lastmod>2018-12-30T02:40:01.546Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://zws910.github.io/2018/10/21/redis-transaction/</loc>
     
     <lastmod>2018-10-21T06:33:51.439Z</lastmod>
