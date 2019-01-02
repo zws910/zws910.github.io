@@ -4,6 +4,42 @@
 
     
   <url>
+    <loc>https://zws910.github.io/2018/08/16/pycharm-cvs/</loc>
+    <lastmod>2019-01-02T06:11:35.236Z</lastmod>
+    <data>
+        <display>
+        <title>Pycharm的git/github配置问题解决办法 Could not read from remote repository.</title>
+        <pubTime>2018-08-16T11:24:56.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+        <tag>git</tag>
+         
+        <tag>pycharm</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://zws910.github.io/2019/01/02/projects/</loc>
+    <lastmod>2019-01-02T06:09:17.612Z</lastmod>
+    <data>
+        <display>
+        <title>个人项目展示 / Projects</title>
+        <pubTime>2019-01-02T05:43:16.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://zws910.github.io/2018/12/30/ubuntu-install-mongodb/</loc>
     <lastmod>2018-12-30T02:43:08.355Z</lastmod>
     <data>
@@ -83,27 +119,6 @@
         <tag>Flask</tag>
          
         <tag>Python</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://zws910.github.io/2018/08/16/pycharm-cvs/</loc>
-    <lastmod>2018-08-16T13:19:00.452Z</lastmod>
-    <data>
-        <display>
-        <title>Pycharm的git/github配置问题解决办法 Could not read from remote repository.</title>
-        <pubTime>2018-08-16T11:24:56.000Z</pubTime>
-        
-        <tag>python</tag>
-         
-        <tag>git</tag>
-         
-        <tag>pycharm</tag>
          
          
            

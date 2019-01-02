@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zws910.github.io/2018/08/16/pycharm-cvs/</loc>
+    
+    <lastmod>2019-01-02T06:11:35.236Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zws910.github.io/2019/01/02/projects/</loc>
+    
+    <lastmod>2019-01-02T06:09:17.612Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://zws910.github.io/2018/12/30/ubuntu-install-mongodb/</loc>
     
     <lastmod>2018-12-30T02:43:08.355Z</lastmod>
@@ -40,13 +54,6 @@
     <loc>https://zws910.github.io/2018/08/09/context-in-flask/</loc>
     
     <lastmod>2018-08-16T13:19:57.055Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://zws910.github.io/2018/08/16/pycharm-cvs/</loc>
-    
-    <lastmod>2018-08-16T13:19:00.452Z</lastmod>
     
   </url>
   
