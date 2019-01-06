@@ -4,8 +4,25 @@
 
     
   <url>
+    <loc>https://zws910.github.io/2019/01/06/asynio-aiohttp/</loc>
+    <lastmod>2019-01-06T10:41:56.112Z</lastmod>
+    <data>
+        <display>
+        <title>通过asyncio+aiohttp实现异步请求</title>
+        <pubTime>2019-01-06T10:30:45.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://zws910.github.io/2019/01/03/algorithm-py/</loc>
-    <lastmod>2019-01-03T07:46:20.213Z</lastmod>
+    <lastmod>2019-01-06T10:41:52.598Z</lastmod>
     <data>
         <display>
         <title>python列表查询、冒泡排序、快速排序、堆排序</title>
