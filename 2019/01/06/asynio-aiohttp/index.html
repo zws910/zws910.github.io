@@ -158,18 +158,18 @@
 
 
 
-  <meta name="description" content="通过python自带的包asyncio可以实现异步io, 但是由于asyncio只支持TCP请求, 不支持HTTP请求, 所以我们需要对请求进行封装. 调用第三方包aiohttp可以很方便的实现封装. 直接上代码: 12345678910111213141516171819202122232425262728#!/usr/bin/env python# -*- coding: utf-8 -*-#">
+  <meta name="description" content="asyncio+aiohttp示例通过python自带的包asyncio可以实现异步io, 但是由于asyncio只支持TCP请求, 不支持HTTP请求, 所以我们需要对请求进行封装. 调用第三方包aiohttp可以很方便的实现封装. 直接上代码: 12345678910111213141516171819202122232425262728#!/usr/bin/env python# -*- c">
 <meta name="keywords" content="python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="通过asyncio+aiohttp实现异步请求">
 <meta property="og:url" content="https://zws910.github.io/2019/01/06/asynio-aiohttp/index.html">
 <meta property="og:site_name" content="Vince&#39;s Blog">
-<meta property="og:description" content="通过python自带的包asyncio可以实现异步io, 但是由于asyncio只支持TCP请求, 不支持HTTP请求, 所以我们需要对请求进行封装. 调用第三方包aiohttp可以很方便的实现封装. 直接上代码: 12345678910111213141516171819202122232425262728#!/usr/bin/env python# -*- coding: utf-8 -*-#">
+<meta property="og:description" content="asyncio+aiohttp示例通过python自带的包asyncio可以实现异步io, 但是由于asyncio只支持TCP请求, 不支持HTTP请求, 所以我们需要对请求进行封装. 调用第三方包aiohttp可以很方便的实现封装. 直接上代码: 12345678910111213141516171819202122232425262728#!/usr/bin/env python# -*- c">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-01-06T10:41:56.112Z">
+<meta property="og:updated_time" content="2019-01-06T10:53:58.054Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="通过asyncio+aiohttp实现异步请求">
-<meta name="twitter:description" content="通过python自带的包asyncio可以实现异步io, 但是由于asyncio只支持TCP请求, 不支持HTTP请求, 所以我们需要对请求进行封装. 调用第三方包aiohttp可以很方便的实现封装. 直接上代码: 12345678910111213141516171819202122232425262728#!/usr/bin/env python# -*- coding: utf-8 -*-#">
+<meta name="twitter:description" content="asyncio+aiohttp示例通过python自带的包asyncio可以实现异步io, 但是由于asyncio只支持TCP请求, 不支持HTTP请求, 所以我们需要对请求进行封装. 调用第三方包aiohttp可以很方便的实现封装. 直接上代码: 12345678910111213141516171819202122232425262728#!/usr/bin/env python# -*- c">
 
 
 
@@ -408,7 +408,7 @@
                 
               
 
-              <time title="创建时间：2019-01-06 18:30:45 / 修改时间：18:41:56" itemprop="dateCreated datePublished" datetime="2019-01-06T18:30:45+08:00">2019-01-06</time>
+              <time title="创建时间：2019-01-06 18:30:45 / 修改时间：18:53:58" itemprop="dateCreated datePublished" datetime="2019-01-06T18:30:45+08:00">2019-01-06</time>
             
 
             
@@ -457,13 +457,15 @@
       
 
       
-        <p>通过python自带的包asyncio可以实现异步io, 但是由于asyncio只支持TCP请求, 不支持HTTP请求, 所以我们需要对请求进行封装. 调用第三方包aiohttp可以很方便的实现封装.</p>
+        <h2 id="asyncio-aiohttp示例"><a href="#asyncio-aiohttp示例" class="headerlink" title="asyncio+aiohttp示例"></a>asyncio+aiohttp示例</h2><p>通过python自带的包asyncio可以实现异步io, 但是由于asyncio只支持TCP请求, 不支持HTTP请求, 所以我们需要对请求进行封装. 调用第三方包aiohttp可以很方便的实现封装.</p>
 <p>直接上代码:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time    : 2019/1/6 18:16</span></span><br><span class="line"><span class="comment"># @Author  : Vince</span></span><br><span class="line"><span class="comment"># @Site    : https://zws910.github.io</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> aiohttp</span><br><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@asyncio.coroutine</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fetch_aync</span><span class="params">(url)</span>:</span></span><br><span class="line">    print(url)</span><br><span class="line">    <span class="comment"># response = yield from aiohttp.request('GET', url)</span></span><br><span class="line">    response = <span class="keyword">yield</span> <span class="keyword">from</span> aiohttp.ClientSession().get(url)</span><br><span class="line">    print(url, response)</span><br><span class="line">    response.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">tasks = [</span><br><span class="line">    fetch_aync(<span class="string">'http://www.baidu.com'</span>),</span><br><span class="line">    fetch_aync(<span class="string">'http://www.google.com'</span>),</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">event_loop = asyncio.get_event_loop()</span><br><span class="line">results = event_loop.run_until_complete(asyncio.gather(*tasks))</span><br><span class="line">event_loop.close()</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <p>书上写的是通过<code>response = yield from aiohttp.request(&#39;GET&#39;, url)</code>进行请求, 但是实际运行会报如下错误:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TypeError: &apos;_SessionRequestContextManager&apos; object is not iterable</span><br></pre></td></tr></table></figure>
 <p>网上查了半天, 发现应该用<code>aiohttp.ClientSession().get</code>进行下载. 这个函数的作用是保证相关的TCP资源能够得到释放，比如TCP链接.</p>
+<h2 id="asyncio-requests示例"><a href="#asyncio-requests示例" class="headerlink" title="asyncio+requests示例"></a>asyncio+requests示例</h2><p>通过常用的requests模块也能对请求进行封装, 代码如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">task</span><span class="params">(func, *args)</span>:</span></span><br><span class="line">    loop = asyncio.get_event_loop()</span><br><span class="line">    future = loop.run_in_executor(<span class="keyword">None</span>, func, *args)</span><br><span class="line">    response = <span class="keyword">yield</span> <span class="keyword">from</span> future</span><br><span class="line">    print(response.url, response.content)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">tasks = [</span><br><span class="line">    task(requests.get, <span class="string">'http://www.baidu.com'</span>),</span><br><span class="line">    task(requests.get, <span class="string">'https://www.cnblogs.com'</span>),</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">loop = asyncio.get_event_loop()</span><br><span class="line">results = loop.run_until_complete(asyncio.gather(*tasks))</span><br><span class="line">loop.close()</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -609,8 +611,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -690,6 +701,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#asyncio-aiohttp示例"><span class="nav-number">1.</span> <span class="nav-text">asyncio+aiohttp示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#asyncio-requests示例"><span class="nav-number">2.</span> <span class="nav-text">asyncio+requests示例</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
