@@ -158,25 +158,25 @@
 
 
 
-  <meta name="description" content="简单事务控制 redis是单线程处理所有client的请求 multi当前client连接进入一个事务上下文, 该连接后续的命令不会立即执行, 而是放到队列(Queue)中, 直到接收到exec指令后才会按顺序执行  123456789101112redis 127.0.0.1:6379&amp;gt; multiOKredis 127.0.0.1:6379&amp;gt; set age 10QUEUEDred">
-<meta name="keywords" content="Redis">
+  <meta name="description" content="利用Python + Selenium 爬取选股宝首页新闻及利好,利空消息. 直接附上源码:">
+<meta name="keywords" content="Python,spider">
 <meta property="og:type" content="article">
-<meta property="og:title" content="redis事务及持久化 &#x2F; Redis Transaction">
-<meta property="og:url" content="https://zws910.github.io/2018/10/21/redis-transaction/index.html">
+<meta property="og:title" content="Python + selenium 爬取选股宝首页新闻">
+<meta property="og:url" content="https://zws910.github.io/2019/01/12/xuangubao/index.html">
 <meta property="og:site_name" content="Vince&#39;s Blog">
-<meta property="og:description" content="简单事务控制 redis是单线程处理所有client的请求 multi当前client连接进入一个事务上下文, 该连接后续的命令不会立即执行, 而是放到队列(Queue)中, 直到接收到exec指令后才会按顺序执行  123456789101112redis 127.0.0.1:6379&amp;gt; multiOKredis 127.0.0.1:6379&amp;gt; set age 10QUEUEDred">
+<meta property="og:description" content="利用Python + Selenium 爬取选股宝首页新闻及利好,利空消息. 直接附上源码:">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-10-21T06:33:51.439Z">
+<meta property="og:updated_time" content="2019-01-12T04:31:27.924Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="redis事务及持久化 &#x2F; Redis Transaction">
-<meta name="twitter:description" content="简单事务控制 redis是单线程处理所有client的请求 multi当前client连接进入一个事务上下文, 该连接后续的命令不会立即执行, 而是放到队列(Queue)中, 直到接收到exec指令后才会按顺序执行  123456789101112redis 127.0.0.1:6379&amp;gt; multiOKredis 127.0.0.1:6379&amp;gt; set age 10QUEUEDred">
+<meta name="twitter:title" content="Python + selenium 爬取选股宝首页新闻">
+<meta name="twitter:description" content="利用Python + Selenium 爬取选股宝首页新闻及利好,利空消息. 直接附上源码:">
 
 
 
 
 
 
-  <link rel="canonical" href="https://zws910.github.io/2018/10/21/redis-transaction/"/>
+  <link rel="canonical" href="https://zws910.github.io/2019/01/12/xuangubao/"/>
 
 
 
@@ -186,7 +186,7 @@
   };
 </script>
 
-  <title>redis事务及持久化 / Redis Transaction | Vince's Blog</title>
+  <title>Python + selenium 爬取选股宝首页新闻 | Vince's Blog</title>
   
 
 
@@ -363,7 +363,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://zws910.github.io/2018/10/21/redis-transaction/">
+    <link itemprop="mainEntityOfPage" href="https://zws910.github.io/2019/01/12/xuangubao/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Vincent Zheng">
@@ -380,7 +380,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">redis事务及持久化 / Redis Transaction<a href="https://github.com/theme-next/theme-next.org/_posts/tree/master/2018-10-21redis-transaction.md" class="post-edit-link" title="编辑" target="_blank">
+          <h1 class="post-title" itemprop="name headline">Python + selenium 爬取选股宝首页新闻<a href="https://github.com/theme-next/theme-next.org/_posts/tree/master/2019-01-12xuangubao.md" class="post-edit-link" title="编辑" target="_blank">
                     <i class="fa fa-pencil"></i>
                   </a>
                 
@@ -408,7 +408,7 @@
                 
               
 
-              <time title="创建时间：2018-10-21 14:29:13 / 修改时间：14:33:51" itemprop="dateCreated datePublished" datetime="2018-10-21T14:29:13+08:00">2018-10-21</time>
+              <time title="创建时间：2019-01-12 12:27:19 / 修改时间：12:31:27" itemprop="dateCreated datePublished" datetime="2019-01-12T12:27:19+08:00">2019-01-12</time>
             
 
             
@@ -426,7 +426,7 @@
 
           
           
-             <span id="/2018/10/21/redis-transaction/" class="leancloud_visitors" data-flag-title="redis事务及持久化 / Redis Transaction">
+             <span id="/2019/01/12/xuangubao/" class="leancloud_visitors" data-flag-title="Python + selenium 爬取选股宝首页新闻">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -457,32 +457,10 @@
       
 
       
-        <h2 id="简单事务控制"><a href="#简单事务控制" class="headerlink" title="简单事务控制"></a>简单事务控制</h2><ul>
-<li>redis是单线程处理所有client的请求</li>
-<li><code>multi</code>当前client连接进入一个事务上下文, 该连接后续的命令不会立即执行, 而是放到队列(Queue)中, 直到接收到<code>exec</code>指令后才会按顺序执行</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">redis 127.0.0.1:6379&gt; multi</span><br><span class="line">OK</span><br><span class="line">redis 127.0.0.1:6379&gt; set age 10</span><br><span class="line">QUEUED</span><br><span class="line">redis 127.0.0.1:6379&gt; set age 20</span><br><span class="line">QUEUED</span><br><span class="line">redis 127.0.0.1:6379&gt; exec</span><br><span class="line">1) OK</span><br><span class="line">2) OK</span><br><span class="line">redis 127.0.0.1:6379&gt; get age</span><br><span class="line">&quot;20&quot;</span><br><span class="line">redis 127.0.0.1:6379&gt;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>使用<code>discard</code>命令取消事务, 使其回滚</li>
-<li><code>watch</code>命令可以监视键值对, 当<code>exec</code>提交时如果被监视的键值对发生变化, 事务将被取消</li>
-</ul>
-<h2 id="复杂事务控制-乐观锁"><a href="#复杂事务控制-乐观锁" class="headerlink" title="复杂事务控制 - 乐观锁"></a>复杂事务控制 - 乐观锁</h2><a id="more"></a>
-<ul>
-<li>基于version版本记录机制实现, 即为数据增加一个版本标识(version字段), 读取时将此版本号一同读出, 之后更新时对此版本号加1</li>
-<li>如果提交的数据版本号大于数据库当前版本号, 则予以更新, 否则失败</li>
-<li>即如果session 1和session 2同时对数据库进行操作, 在session 1提交更新之前, session 2已经完成提交, 那么数据库版本号已经+1, 则session 1提交失败</li>
-<li><strong>redis只能保证事务的每个命令连续执行, 如果事务中的一个命令失败了, 并不会回滚其他命令</strong></li>
-</ul>
-<h2 id="持久化机制"><a href="#持久化机制" class="headerlink" title="持久化机制"></a>持久化机制</h2><p>redis是支持持久化的内存数据库, 需要经常将内存中的数据同步到磁盘来保证持久化; 有snapshotting快照(默认)和append-only file (aof) 两种方式</p>
-<h3 id="snapshooting"><a href="#snapshooting" class="headerlink" title="snapshooting"></a>snapshooting</h3><p>将内存中的数据以快照的方式写入到二进制文件, 默认文件名dump.rdb; 可以修改redis配置来实现</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">save 900 1  # 900秒内如果超过1个key被修改, 则发起快照保存</span><br><span class="line">save 300 10  # 300秒内如果超过10个key被修改, 则发起快照保存</span><br></pre></td></tr></table></figure>
-<p>也可以使用<code>save</code>或<code>bgsave</code>命令通知redis做一次快照持久化(不推荐), 这种方式会阻塞所有client请求;</p>
-<p>另外需要注意, 每次快照持久化都是将内存数据完整写入磁盘一次, 如果数据量大时, 会造成大量的磁盘io操作, 严重影响性能</p>
-<h3 id="append-only-file"><a href="#append-only-file" class="headerlink" title="append-only file"></a>append-only file</h3><p>由于每次snapshooting之间有间隔, 如果redis意外down掉, 会丢失最后一次快照前的所有修改. 避免这种情况可以使用aof方式持久化</p>
-<p>aof方式下, redis会通过write函数追加到文件中(默认是appendonly.aof)</p>
-<p>配置文件:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">appendonly yes  # 启用aof持久化方式</span><br><span class="line"># appendfsync always  # 收到写命令立即写入磁盘, 最慢, 但是保证完全的持久化</span><br><span class="line">appendfsync everysec  # 每秒钟写入磁盘一次, 在性能和持久化方面做了折中</span><br><span class="line"># appendfsync no  # 完全依赖os, 性能最好, 但持久化没保证</span><br></pre></td></tr></table></figure>
-<p>使用aof方式的问题是, 其持久化文件会变得越来越大。 为了压缩, redis提供了<code>bgrewriteaof</code>命令; 收到此命令后,  redis将使用与快照类似的方式将内存中的数据以命令的形式保存到临时文件中, 最后替换原来的文件.</p>
+        <p>利用Python + Selenium 爬取选股宝首页新闻及利好,利空消息.</p>
+<p>直接附上源码:</p>
+<a id="more"></a>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">XuanGuBao</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.start_url = <span class="string">"https://xuangubao.cn/"</span></span><br><span class="line">        self.driver = webdriver.Chrome()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_content_lsit</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""提取页面内容"""</span></span><br><span class="line">        next_page = self.driver.find_elements_by_xpath(<span class="string">"//span[@class='home-news-footer-loadmore']"</span>)</span><br><span class="line">        next_page = next_page[<span class="number">0</span>] <span class="keyword">if</span> next_page <span class="keyword">else</span> <span class="keyword">None</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> next_page:</span><br><span class="line">            next_page.click()</span><br><span class="line">            time.sleep(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># for test use</span></span><br><span class="line">        <span class="comment"># i = 0</span></span><br><span class="line">        <span class="comment"># while i &lt; 10 and next_page:</span></span><br><span class="line">        <span class="comment">#     next_page.click()</span></span><br><span class="line">        <span class="comment">#     time.sleep(1)</span></span><br><span class="line">        <span class="comment">#     i += 1</span></span><br><span class="line"></span><br><span class="line">        li_list = self.driver.find_elements_by_xpath(<span class="string">"//ul[@class='home-news-container']/li"</span>)</span><br><span class="line">        content_list = []</span><br><span class="line">        bear_list = []</span><br><span class="line">        <span class="keyword">for</span> li <span class="keyword">in</span> li_list:</span><br><span class="line">            item = &#123;&#125;</span><br><span class="line">            item[<span class="string">'id'</span>] = li.get_attribute(<span class="string">'id'</span>)</span><br><span class="line">            title = li.find_elements_by_xpath(<span class="string">".//div[@class='news-item-title']/a/span"</span>)</span><br><span class="line">            title = title[<span class="number">0</span>].text <span class="keyword">if</span> title <span class="keyword">else</span> <span class="keyword">None</span></span><br><span class="line">            item[<span class="string">'title'</span>] = title</span><br><span class="line">            detail = li.find_elements_by_xpath(<span class="string">".//div[@class='news-item-detail']/pre"</span>)</span><br><span class="line">            detail = detail[<span class="number">0</span>].text <span class="keyword">if</span> detail <span class="keyword">else</span> <span class="keyword">None</span></span><br><span class="line">            item[<span class="string">'detail'</span>] = detail</span><br><span class="line">            <span class="comment"># 利空消息</span></span><br><span class="line">            bear = li.find_elements_by_xpath(<span class="string">".//span[@class='bullish-and-bear bear']"</span>)</span><br><span class="line">            <span class="keyword">if</span> bear:</span><br><span class="line">                print(<span class="string">'found news of bear.'</span>)</span><br><span class="line">                tag_list = []</span><br><span class="line">                tags = li.find_elements_by_xpath(<span class="string">".//a[@class='news-item-intro-topic']"</span>)</span><br><span class="line">                <span class="keyword">for</span> tag <span class="keyword">in</span> tags:</span><br><span class="line">                    tag_list.append(tag.text)</span><br><span class="line">                item[<span class="string">'isBear'</span>] = <span class="keyword">True</span></span><br><span class="line">                item[<span class="string">'tags'</span>] = tag_list</span><br><span class="line">            <span class="comment"># 利好消息</span></span><br><span class="line">            bullish = li.find_elements_by_xpath(<span class="string">".//span[@class='bullish-and-bear bullish']"</span>)</span><br><span class="line">            <span class="keyword">if</span> bear:</span><br><span class="line">                print(<span class="string">'found news of bullish.'</span>)</span><br><span class="line">                tag_list = []</span><br><span class="line">                tags = li.find_elements_by_xpath(<span class="string">".//a[@class='news-item-intro-topic']"</span>)</span><br><span class="line">                <span class="keyword">for</span> tag <span class="keyword">in</span> tags:</span><br><span class="line">                    tag_list.append(tag.text)</span><br><span class="line">                item[<span class="string">'isBullish'</span>] = <span class="keyword">True</span></span><br><span class="line">                item[<span class="string">'tags'</span>] = tag_list</span><br><span class="line">            print(item)</span><br><span class="line"></span><br><span class="line">            content_list.append(item)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> content_list</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># 发送请求</span></span><br><span class="line">        self.driver.get(self.start_url)</span><br><span class="line">        content_list = self.get_content_lsit()</span><br><span class="line">        self.driver.quit()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    xuangubao = XuanGuBao()</span><br><span class="line">    xuangubao.run()</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -502,12 +480,12 @@
   <!-- JS库 sweetalert 可修改路径 -->
   <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/2018/10/21/redis-transaction/">redis事务及持久化 / Redis Transaction</a></p>
+  <p><span>本文标题:</span><a href="/2019/01/12/xuangubao/">Python + selenium 爬取选股宝首页新闻</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Vincent Zheng 的个人博客">Vincent Zheng</a></p>
-  <p><span>发布时间:</span>2018年10月21日 - 14:10</p>
-  <p><span>最后更新:</span>2018年10月21日 - 14:10</p>
-  <p><span>原始链接:</span><a href="/2018/10/21/redis-transaction/" title="redis事务及持久化 / Redis Transaction">https://zws910.github.io/2018/10/21/redis-transaction/</a>
-    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://zws910.github.io/2018/10/21/redis-transaction/"  aria-label="复制成功！"></i></span>
+  <p><span>发布时间:</span>2019年01月12日 - 12:01</p>
+  <p><span>最后更新:</span>2019年01月12日 - 12:01</p>
+  <p><span>原始链接:</span><a href="/2019/01/12/xuangubao/" title="Python + selenium 爬取选股宝首页新闻">https://zws910.github.io/2019/01/12/xuangubao/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://zws910.github.io/2019/01/12/xuangubao/"  aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
 </div>
@@ -538,7 +516,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Redis/" rel="tag"><i class="fa fa-tag"></i> Redis</a>
+            <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
+          
+            <a href="/tags/spider/" rel="tag"><i class="fa fa-tag"></i> spider</a>
           
         </div>
       
@@ -563,8 +543,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/16/pycharm-cvs/" rel="next" title="Pycharm的git/github配置问题解决办法 Could not read from remote repository.">
-                <i class="fa fa-chevron-left"></i> Pycharm的git/github配置问题解决办法 Could not read from remote repository.
+              <a href="/2019/01/06/asynio-aiohttp/" rel="next" title="通过asyncio+aiohttp实现异步请求">
+                <i class="fa fa-chevron-left"></i> 通过asyncio+aiohttp实现异步请求
               </a>
             
           </div>
@@ -572,10 +552,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/12/30/ubuntu-install-mongodb/" rel="prev" title="Ubuntu 16.04 安装MongoDB">
-                Ubuntu 16.04 安装MongoDB <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -632,17 +608,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -724,22 +691,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单事务控制"><span class="nav-number">1.</span> <span class="nav-text">简单事务控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复杂事务控制-乐观锁"><span class="nav-number">2.</span> <span class="nav-text">复杂事务控制 - 乐观锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#持久化机制"><span class="nav-number">3.</span> <span class="nav-text">持久化机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#snapshooting"><span class="nav-number">3.1.</span> <span class="nav-text">snapshooting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#append-only-file"><span class="nav-number">3.2.</span> <span class="nav-text">append-only file</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
